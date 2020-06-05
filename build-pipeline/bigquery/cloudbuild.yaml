@@ -60,7 +60,6 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   dir: '$REPO_NAME/build-pipeline'
-  ['-c', 'bq --project_id=my-project-name query --use_legacy_sql=false < ./my_query.sql']
   args: ['composer', 'environments', 'run', '${_COMPOSER_ENV_NAME}', '--location', '${_COMPOSER_REGION}', 'bq' --project_id ${_PROJECT_NAME} 'query --use_legacy_sql=false' '$SQL_BUCKET/']
   id: 'trigger-pipeline-execution'
 
