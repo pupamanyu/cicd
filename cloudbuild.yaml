@@ -1,0 +1,56 @@
+# Copyright 2019 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+steps:
+  # Add some checks around examples.
+  - name: 'gcr.io/cloud-builders/git'
+    id: get commit sha
+    entrypoint: /bin/sh
+    args:
+      - '-c'
+      - |
+        echo "$(pwd)"
+        commit_sha=$(git rev-parse HEAD)
+        echo "$commit_sha"
+        file=$(git show --pretty="format:" --name-only $commit_sha)
+        echo "$file"
+        dir=$(dirname $file)
+        echo "$dir"
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+
+        # Loop through the builders, and build independently.
+        # for d in */; do
+        for d in "$dir"/*; do
+          config="${d}cloudbuild.yaml"
+          #config="cloudbuild.yaml"
+
+          if [[ ! -f "${config}" ]]; then
+            continue
+          fi
+
+          echo "cloudbuild.yaml exists in $dir"
+
+          echo "Building $d ... "
+          (
+          gcloud builds submit $d --config=${config}
+
+          ) &
+          done
+          wait
+
+tags: ['$_SHA']

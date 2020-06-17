@@ -1,0 +1,5 @@
+apache-airflow[gcp_api]==1.10.10
+google-cloud-bigquery==1.25.0
+google-cloud-storage==1.29.0
+pytest==5.4.3
+werkzeug==1.0.1

@@ -1,0 +1,5 @@
+org\apache\beam\examples\WordCount$ExtractWordsFn.class
+org\apache\beam\examples\WordCount$FormatAsTextFn.class
+org\apache\beam\examples\WordCount.class
+org\apache\beam\examples\WordCount$CountWords.class
+org\apache\beam\examples\WordCount$WordCountOptions.class

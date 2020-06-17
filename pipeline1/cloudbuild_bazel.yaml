@@ -1,0 +1,54 @@
+# A cloud build config to trigger pipeline 1
+
+steps:
+  # Build the python files TAR
+  # this tar file is untarred and uploaded to gcs dags folder which is used by composer
+  # to run in airflow
+  - name: gcr.io/cloud-builders/bazel
+    args: [
+      '--output_base', '/workspace',
+      'build', '//pipeline1:main',
+       # the Bazel sandbox on cloudbuild.
+      '--strategy', 'PythonCompile=standalone'
+    ]
+    env: ['PROJECT_ID=$PROJECT_ID']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        tar -xzvf pipeline1.tar.gz
+  - name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
+    entrypoint: 'python'
+    args: ['test_compare_xcom_maps.py']
+    dir: 'workspace/workflow-dag'
+    id: 'unit-test-on-operator-code'
+
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', 'support-files/input.txt', 'gs://${_COMPOSER_INPUT_BUCKET}']
+    dir: 'workspace/workflow-dag'
+    id: 'deploy-test-input-file'
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', 'support-files/ref.txt', 'gs://${_COMPOSER_REF_BUCKET}']
+    dir: 'workspace/workflow-dag'
+    id: 'deploy-test-ref-file'
+  - name: gcr.io/cloud-builders/gcloud
+    args: ['composer', 'environments', 'run', '${_COMPOSER_ENV_NAME}', '--location', '${_COMPOSER_REGION}','variables', '--', '--set', 'dataflow_jar_file_test', 'dataflow_deployment_$BUILD_ID.jar']
+    id: 'set-composer-jar-ref'
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', 'compare_xcom_maps.py', '${_COMPOSER_DAG_BUCKET}']
+    dir: 'workspace/workflow-dag'
+    id: 'deploy-custom-operator'
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', 'data-pipeline-test.py', '${_COMPOSER_DAG_BUCKET}']
+    dir: '$REPO_NAME/workflow-dag'
+    id: 'deploy-processing-pipeline'
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: 'bash'
+    args: ['wait_for_dag_deployed.sh', '${_COMPOSER_ENV_NAME}', '${_COMPOSER_REGION}', '${_COMPOSER_DAG_NAME_TEST}', '6', '20']
+    dir: '$REPO_NAME/build-pipeline'
+    id: 'wait-for-dag-deployed-on-composer'
+  - name: gcr.io/cloud-builders/gcloud
+    args: ['composer', 'environments', 'run', '${_COMPOSER_ENV_NAME}', '--location', '${_COMPOSER_REGION}', 'trigger_dag', '--', '${_COMPOSER_DAG_NAME_TEST}', '--run_id=$BUILD_ID']
+    id: 'trigger-pipeline-execution'
