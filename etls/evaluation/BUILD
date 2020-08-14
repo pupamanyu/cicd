@@ -1,9 +1,11 @@
 package(default_visibility = ["//visibility:public"])
-load("@rules_pkg//:pkg.bzl", "pkg_tar", "pkg_deb")
+
+load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
+
 pkg_tar(
     name = "package",
+    srcs = ["//etls/evaluation:game-1/game_event"],
     extension = "tar.bz2",
-    srcs = ["//etls/evaluation:game-1/game_event"]
 )
 
 pkg_deb(
@@ -18,6 +20,6 @@ pkg_deb(
     description = "Debian package for game-event",
     homepage = "http://bazel.build",
     maintainer = "The Bazel Authors <bazel-dev@googlegroups.com>",
-    package = "bazel",
-    version = "3.3.1",
+    package = "game-event",
+    version = "1.0.0",
 )
