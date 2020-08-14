@@ -17,9 +17,9 @@ pkg_deb(
         "zlib1g-dev",
         "unzip",
     ],
-    description = "Debian package for game-event",
+    description = "Debian container package encapsulating airflow dags inside data tar ball for publishing to package registry",
     homepage = "http://bazel.build",
-    maintainer = "The Bazel Authors <bazel-dev@googlegroups.com>",
+    maintainer = "The Authors <authors@customer.com>",
     package = "game-event",
     version = "1.0.0",
 )
