@@ -1,0 +1,26 @@
+# Copyright 2019 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:alpine'
+  entrypoint: 'git'
+  args: ['clone', '--single-branch', '--branch', 'https://source.developers.google.com/p/${PROJECT_ID}/r/${REPO_NAME}']
+  id: 'check-out-source-code'
+- name: 'gcr.io/cloud-marketplace-containers/google/bazel'
+  entrypoint: 'bazel'
+  args: ['build', '//:game-event']
+  id: 'build-dag-artifact'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:alpine'
+  entrypoint: 'bash'
+  args: ['-c', '${REPO_NAME}/push-artifact.sh']
+  id: 'push-artifact'
