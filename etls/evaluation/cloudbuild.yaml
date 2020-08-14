@@ -37,5 +37,5 @@ steps:
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:alpine"
     entrypoint: "bash"
     dir: "${REPO_NAME}"
-    args: ["./build-utils/publish-artifact.sh"]
+    args: ["etls/evaluation/build-utils/publish-artifact.sh"]
     id: "publish-artifact"
