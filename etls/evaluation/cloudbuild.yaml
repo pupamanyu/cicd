@@ -14,14 +14,6 @@
 steps:
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
     entrypoint: "git"
-    # args:
-    #   [
-    #     "clone",
-    #     "--single-branch",
-    #     "--branch",
-    #     "${BRANCH_NAME}",
-    #     "https://source.developers.google.com/p/${PROJECT_ID}/r/${REPO_NAME}",
-    #   ]
     args:
       [
         "clone",
@@ -30,17 +22,14 @@ steps:
         "${BRANCH_NAME}",
         "${GITURI}/${REPO_NAME}",
       ]
-    # env:
-    #   - "REPO_NAME=cicd"
-    #   - "GITURI=https://github.com/pupamanyu"
-    #   - "BRANCH_NAME=artifact-push-pull"
+    env: ["GITURI=https://github.com/pupamanyu"]
     id: "check-out-source-code"
   - name: "gcr.io/cloud-marketplace-containers/google/bazel"
     entrypoint: "bazel"
-    dir: "/workspace/${REPO_NAME}"
+    dir: "${REPO_NAME}"
     args: ["build", "//etls/evaluation:game-event"]
     id: "build-dag-artifact"
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:alpine"
     entrypoint: "bash"
-    args: ["-c", "/workspace/${REPO_NAME}/build-utils/publish-artifact.sh"]
+    args: ["-c", "./build-utils/publish-artifact.sh"]
     id: "publish-artifact"
