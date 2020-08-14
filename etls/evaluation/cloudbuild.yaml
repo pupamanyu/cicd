@@ -27,8 +27,8 @@ steps:
         "clone",
         "--single-branch",
         "--branch",
-        "artifact-push-pull",
-        "https://github.com/pupamanyu/cicd",
+        "${BRANCH_NAME}",
+        "${GITURI}/${REPO_NAME}",
       ]
     # env:
     #   - "REPO_NAME=cicd"
@@ -37,10 +37,10 @@ steps:
     id: "check-out-source-code"
   - name: "gcr.io/cloud-marketplace-containers/google/bazel"
     entrypoint: "bazel"
-    dir: "/workspace/cicd"
+    dir: "/workspace/${REPO_NAME}"
     args: ["build", "//etls/evaluation:game-event"]
     id: "build-dag-artifact"
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:alpine"
     entrypoint: "bash"
-    args: ["-c", "${REPO_NAME}/push-artifact.sh"]
-    id: "push-artifact"
+    args: ["-c", "/workspace/${REPO_NAME}/build-utils/publish-artifact.sh"]
+    id: "publish-artifact"
