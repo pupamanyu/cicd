@@ -22,7 +22,7 @@ extract_package() {
     # extract the dag from downloaded .deb
     echo "TODO: Extract dag from .deb"
     ar xv ${ARTIFACT}_${ARTIFACTVERSION}_${ARTIFACTARCH}.deb
-    ar tv data.tar.bz2
+    tar tjf data.tar.bz2
 }
 
 push_dag_to_airflow() {
