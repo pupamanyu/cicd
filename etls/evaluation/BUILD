@@ -12,7 +12,7 @@ pkg_deb(
     name = "game-event",
     architecture = "amd64",
     built_using = "unzip (6.0.1)",
-    data = ":package",
+    data = ":game-event",
     depends = [
         "zlib1g-dev",
         "unzip",
