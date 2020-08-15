@@ -1,7 +1,7 @@
 # Extract Artifact deb from artifact registry, and push DAG directory to composer GCS DAG DIR
 
 REGION=us-central1
-PROJECT=${PROJECT_ID}
+PROJECT=pramodrao-dataengg-workshop
 REPOSITORY=artifact-repo
 
 configure_apt() {
