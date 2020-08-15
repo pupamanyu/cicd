@@ -1,6 +1,4 @@
 # push artifact.sh
-find /workspace/cicd/bazel-bin/etls/evaluation -type f -ls
-
 ARTIFACTBUCKET=gs://pramodrao-dataengg-avroload
 ARTIFACTDIR=/workspace/cicd/bazel-bin/etls/evaluation
 ARTIFACT=game-event_1.0.0_amd64.deb

@@ -39,3 +39,9 @@ steps:
     dir: "${REPO_NAME}"
     args: ["etls/evaluation/build-utils/publish-artifact.sh"]
     id: "publish-artifact"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "bash"
+    dir: "${REPO_NAME}"
+    args: ["etls/evaluation/build-utils/extract-artifact.sh"]
+    id: "extract-artifact"
+
