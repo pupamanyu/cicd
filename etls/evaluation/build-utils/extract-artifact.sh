@@ -6,23 +6,14 @@ REPOSITORY=artifact-repo
 
 configure_apt() {
     pwd
-    echo ${PATH}
-    id
-    updatedb
-    apt-cache search sudo
-    locate sudo
-    which sudo
-    cat /etc/apt/sources.list
-    cat /etc/sudoers
-    uname -a
-    /sbin/sudo echo "deb [ trusted=yes ] https://${REGION}-apt.pkg.dev/projects/${PROJECT} ${REPOSITORY} main" >> /etc/apt/sources.list
-    /sbin/sudo apt-update
+    echo "deb [ trusted=yes ] https://${REGION}-apt.pkg.dev/projects/${PROJECT} ${REPOSITORY} main" >> /etc/apt/sources.list
+    apt-update
 }
 
 download_package() {
     pwd
     apt-get download game-event
-    ls -l
+    ls -l *.deb
 }
 
 extract_package() {
