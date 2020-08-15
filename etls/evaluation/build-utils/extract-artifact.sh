@@ -7,7 +7,7 @@ REPOSITORY=artifact-repo
 configure_apt() {
     pwd
     echo "deb [ trusted=yes ] https://${REGION}-apt.pkg.dev/projects/${PROJECT} ${REPOSITORY} main" >> /etc/apt/sources.list
-    apt-update
+    apt-get update
 }
 
 download_package() {
