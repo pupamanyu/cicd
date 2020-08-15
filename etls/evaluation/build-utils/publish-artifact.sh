@@ -13,8 +13,8 @@ copy_artifact_to_gcs() {
 
 upload_artifact() {
     # Upload deb artifact to artifact registry
-    echo gcloud alpha artifacts packages import artifact-repo --location=us-central1 --gcs-source=gs://pramodrao-dataengg-avroload/code_1.39.2-1571154070_amd64.deb
+    gcloud alpha artifacts packages import artifact-repo --location=us-central1 --gcs-source=gs://pramodrao-dataengg-avroload/code_1.39.2-1571154070_amd64.deb
 }
 
-install_gcloud_alpha
 copy_artifact_to_gcs
+upload_artifact
