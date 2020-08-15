@@ -13,6 +13,7 @@
 # limitations under the License.
 # push artifact.sh
 
+# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTBUCKET=gs://pramodrao-dataengg-avroload
 ARTIFACTDIR=/workspace/cicd/bazel-bin/etls/evaluation
 ARTIFACT=game-event_1.0.0_amd64.deb

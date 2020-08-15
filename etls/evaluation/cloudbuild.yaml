@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# TODO: to look at possibility of using global environment variables for some of the step parameters
 steps:
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
     entrypoint: "git"
@@ -44,4 +46,3 @@ steps:
     dir: "${REPO_NAME}"
     args: ["etls/evaluation/build-utils/extract-artifact.sh"]
     id: "extract-artifact"
-

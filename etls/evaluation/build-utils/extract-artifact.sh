@@ -14,6 +14,7 @@
 # 
 # Extract Artifact deb from artifact registry, and push DAG directory to composer GCS DAG DIR
 
+# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 REGION=us-central1
 PROJECT=pramodrao-dataengg-workshop
 REPOSITORY=artifact-repo
