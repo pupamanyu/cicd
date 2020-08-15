@@ -35,9 +35,8 @@ download_package() {
 
 extract_package() {
     # extract the dag from downloaded .deb
-    echo "TODO: Extract dag from .deb"
-    ar xv ${ARTIFACT}_${ARTIFACTVERSION}_${ARTIFACTARCH}.deb
-    tar xjvf data.tar.bz2
+    ar x ${ARTIFACT}_${ARTIFACTVERSION}_${ARTIFACTARCH}.deb \
+    && tar xjf data.tar.bz2
 }
 
 deploy_dag_to_airflow() {
