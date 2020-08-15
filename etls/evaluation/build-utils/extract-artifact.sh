@@ -4,6 +4,8 @@ REGION=us-central1
 PROJECT=pramodrao-dataengg-workshop
 REPOSITORY=artifact-repo
 ARTIFACT=game-event
+ARTIFACTVERSION=1.0.0
+ARTIFACTARCH=amd64
 AIRFLOWDAGDIR=gs://pramodrao-dataengg-avroload/dag
 
 configure_apt() {
@@ -19,7 +21,7 @@ download_package() {
 extract_package() {
     # extract the dag from downloaded .deb
     echo "TODO: Extract dag from .deb"
-    tar tjf ${ARTIFACT}.deb
+    tar tjf ${ARTIFACT}_${ARTIFACTVERSION}_${ARTIFACTARCH}.deb
 }
 
 push_dag_to_airflow() {
