@@ -22,3 +22,8 @@ push_dag_to_airflow() {
     # use gsutil -m cp -r .. to push the exploded dag directory to airflow dag bucket on GCS
     echo "TODO: Push dag to Airflow DAG bucket" 
 }
+
+configure_apt
+download_package
+extract_package
+push_dag_to_airflow
