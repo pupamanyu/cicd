@@ -43,7 +43,7 @@ deploy_dag_to_airflow() {
     # Deploy DAG to airflow 
     configure_apt \
     && download_package \
-    && extract_package 
+    && extract_package \
     && gsutil -m cp -r game_event ${AIRFLOWDAGDIR}
 }
 
