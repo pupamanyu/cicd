@@ -36,15 +36,16 @@ extract_package() {
     # extract the dag from downloaded .deb
     echo "TODO: Extract dag from .deb"
     ar xv ${ARTIFACT}_${ARTIFACTVERSION}_${ARTIFACTARCH}.deb
-    tar xj data.tar.bz2
+    tar tj data.tar.bz2
 }
 
 deploy_dag_to_airflow() {
     # Deploy DAG to airflow 
     configure_apt \
     && download_package \
-    && extract_package \
-    && gsutil -m cp -r game_event ${AIRFLOWDAGDIR}
+    && extract_package 
+    #\
+    #&& gsutil -m cp -r game_event ${AIRFLOWDAGDIR}
 }
 
 # Main
