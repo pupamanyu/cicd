@@ -18,7 +18,8 @@ steps:
       [
         "clone",
         "--no-checkout",
-        "--depth 1",
+        "--depth",
+        "1",
         "--single-branch",
         "--branch",
         "${BRANCH_NAME}",
