@@ -5,12 +5,17 @@ PROJECT=${PROJECT_ID}
 REPOSITORY=artifact-repo
 
 configure_apt() {
-    sudo echo "deb [ trusted=yes ] https://${REGION}-apt.pkg.dev/projects/${PROJECT} ${REPOSITORY} main" >> /etc/apt/sources.list
-    sudo apt-update
+    pwd
+    echo ${PATH}
+    uname -a
+    /sbin/sudo echo "deb [ trusted=yes ] https://${REGION}-apt.pkg.dev/projects/${PROJECT} ${REPOSITORY} main" >> /etc/apt/sources.list
+    /sbin/sudo apt-update
 }
 
 download_package() {
-    apt download game-event
+    pwd
+    apt-get download game-event
+    ls -l
 }
 
 extract_package() {
