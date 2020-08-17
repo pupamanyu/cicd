@@ -1,0 +1,49 @@
+# Copyright 2020 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# TODO: to look at possibility of using global environment variables for some of the step parameters
+steps:
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "git"
+    args:
+      [
+        "clone",
+        "--single-branch",
+        "--branch",
+        "${BRANCH_NAME}",
+        "https://github.com/pupamanyu/${REPO_NAME}",
+      ]
+    id: "check-out-source-code"
+  - name: "gcr.io/cloud-marketplace-containers/google/bazel"
+    entrypoint: "bazel"
+    dir: "${REPO_NAME}"
+    args:
+      [
+        "build",
+        "//etls/evaluation:game-event",
+        # Need service account to have IAM permissions for https://www.googleapis.com/auth/devstorage.read_write
+        "--remote_http_cache=https://storbucket-nameage.googleapis.com/pramodrao-bazel-remote-cache",
+        "--google_default_credentials",
+      ]
+    id: "build-dag-artifact"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "bash"
+    dir: "${REPO_NAME}"
+    args: ["etls/evaluation/build-utils/publish-artifact.sh"]
+    id: "publish-artifact"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "bash"
+    dir: "${REPO_NAME}"
+    args: ["etls/evaluation/build-utils/deploy-artifact.sh"]
+    id: "deploy-artifact"
