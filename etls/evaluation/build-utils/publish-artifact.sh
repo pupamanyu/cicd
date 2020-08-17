@@ -15,23 +15,27 @@
 
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTBUCKET=gs://pramodrao-dataengg-avroload
+# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTDIR=/workspace/cicd/bazel-bin/etls/evaluation
+# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACT=game-event_1.0.0_amd64.deb
+# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTREPO=artifact-repo
+# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 REGION=us-central1
 
 copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
-    gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET} \
-    && return 0
+    gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET} &&
+        return 0
 }
 
 upload_artifact() {
     # Upload deb artifact to artifact registry
     gcloud alpha artifacts packages import ${ARTIFACTREPO} \
-    --location=${REGION} \
-    --gcs-source=${ARTIFACTBUCKET}/${ARTIFACT} \
-    && return 0
+        --location=${REGION} \
+        --gcs-source=${ARTIFACTBUCKET}/${ARTIFACT} &&
+        return 0
 }
 
 publish_artifact() {

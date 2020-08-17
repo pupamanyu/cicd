@@ -32,6 +32,7 @@ steps:
       [
         "build",
         "//etls/evaluation:game-event",
+        # Need service account to have IAM permissions for https://www.googleapis.com/auth/devstorage.read_write
         "--remote_http_cache=https://storbucket-nameage.googleapis.com/pramodrao-bazel-remote-cache",
         "--google_default_credentials",
       ]

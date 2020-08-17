@@ -21,11 +21,12 @@ REPOSITORY=artifact-repo
 ARTIFACT=game-event
 ARTIFACTVERSION=1.0.0
 ARTIFACTARCH=amd64
+# TODO: AIRFLOWDAGDIR needs to driven by Global Environment Variables
 AIRFLOWDAGDIR=gs://pramodrao-dataengg-avroload/dag
 
 configure_apt() {
     pwd
-    echo "deb [ trusted=yes ] https://${REGION}-apt.pkg.dev/projects/${PROJECT} ${REPOSITORY} main" >>/etc/apt/sources.list
+    echo "deb [ trusted=yes ] https://${REGION}-apt.pkg.dev/projects/${PROJECT} ${REPOSITORY} main" >> /etc/apt/sources.list
     apt-get update
 }
 
@@ -40,7 +41,8 @@ extract_package() {
 }
 
 deploy_dag_to_airflow() {
-    # Deploy DAG to airflow 
+    # Deploy DAG to airflow
+    # TODO: Change game_event to Variables
     configure_apt \
     && download_package \
     && extract_package \
