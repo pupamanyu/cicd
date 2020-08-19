@@ -33,8 +33,8 @@ copy_artifact_to_gcs() {
 }
 
 upload_jar_artifact() {
-    # TODO:
-    echo "TODO: Upload JAR Artifact"
+    # TODO:test mvn deploy
+    mvn deploy:${ARTIFACTBUCKET}/${ARTIFACT}
 }
 
 upload_deb_artifact() {
@@ -51,8 +51,8 @@ publish_deb_artifact() {
 }
 
 publish_jar_artifact() {
-    # TODO:
-    echo "TODO: Publish JAR Artifact"
+    # TODO: testing
+    copy_artifact_to_gcs && upload_jar_artifact
 }
 
 publish_deb_artifact
