@@ -37,3 +37,16 @@ pkg_deb(
     package = "game-event",
     version = "1.0.0",
 )
+
+genrule(
+   name = "version",
+   cmd = "$(git rev-parse HEAD)",
+   outs = ["version.txt"]
+)
+
+genrule(
+    name = "game-event-jar",
+    srcs = ["//etls/evaluation:build-utils/pack-jar.sh"],
+    outs = ["out.txt"],
+    cmd = "$(location //etls/evaluation:build-utils/pack-jar.sh)> $@"
+)
