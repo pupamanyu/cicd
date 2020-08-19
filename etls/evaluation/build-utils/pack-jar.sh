@@ -10,7 +10,8 @@ IMPLVERSION="$(echo git-commit-sha)"
 IMPLVENDOR="Example Company, Inc."
 
 # Artifact related variables
-ARTIFACTSRCSIR="."
+ARTIFACTBASEDIR="."
+ARTIFACTDIR="."
 ARTIFACTJARNAME="$(whoami).jar"
 
 gen_manifest() {
@@ -20,7 +21,7 @@ gen_manifest() {
 pack_jar() {
     local MANIFESTTXT=./manifest.txt
     gen_manifest > ${MANIFESTTXT} 2> /dev/null \
-    && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} ${ARTIFACTSRCSIR} \
+    && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
     && echo "Artifact packed into a JAR successfully"
 }
 
