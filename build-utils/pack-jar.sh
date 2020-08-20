@@ -29,7 +29,7 @@ pack_jar() {
   echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
   echo "ARTIFACTBASEDIR .. ${ARTIFACTBASEDIR}"
   echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
-  cd ${BAZELBINARTIFACTSDIR}
+  cd ${BAZELBINARTIFACTSDIR} || echo "Path not set"
 
   local MANIFESTTXT=./manifest.txt
 
