@@ -17,7 +17,7 @@ ARTIFACTBASEDIR="${WORKSPACEDIR}/${NAME}"
 BAZELBINDIR="${WORKSPACEDIR}/bazel-bin"
 BAZELBINARTIFACTSDIR="${BAZELBINDIR}/etls/evaluation"
 ARTIFACTDIR="."
-ARTIFACTJARNAME="${IMPLVERSION}_${SPECVERSION}.jar"
+ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
 
 gen_manifest() {
   echo -e "Name: ${NAME} \nSpecification-Title: ${SPECTITLE}\nSpecification-Version: ${SPECVERSION}\nSpecification-Vendor: ${SPECVENDOR}\nImplementation-Title: ${IMPLTITLE}\nImplementation-Version: ${IMPLVERSION}\nImplementation-Vendor: ${IMPLVENDOR}\n"

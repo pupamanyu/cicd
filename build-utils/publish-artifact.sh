@@ -20,6 +20,9 @@ ARTIFACTDIR=/workspace/cicd/bazel-bin/etls/evaluation
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 # TODO: This will be a JAR FILE for Maven Repo
 ARTIFACT=game-event_1.0.0_amd64.deb
+BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
+COMMIT_SHA=$(git rev-parse HEAD)
+ARTIFACT=game-event_${BRANCH_NAME}_${COMMIT_SHA}.jar
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 # TODO: This will be a new repo for Maven Repo
 ARTIFACTREPO=artifact-repo
@@ -34,7 +37,10 @@ copy_artifact_to_gcs() {
 
 upload_jar_artifact() {
     # TODO:test mvn deploy
-    mvn deploy:${ARTIFACTBUCKET}/${ARTIFACT}
+    gcloud alpha artifacts packages import ${ARTIFACTREPO} \
+        --location=${REGION} \
+        --gcs-source=${ARTIFACTBUCKET}/${ARTIFACT} &&
+        return 0
 }
 
 upload_deb_artifact() {
@@ -55,5 +61,5 @@ publish_jar_artifact() {
     copy_artifact_to_gcs && upload_jar_artifact
 }
 
-publish_deb_artifact
+#publish_deb_artifact
 publish_jar_artifact
