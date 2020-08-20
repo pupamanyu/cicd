@@ -31,7 +31,7 @@ pack_jar() {
   echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
   cd ${BAZELBINARTIFACTSDIR} || echo "Path not set"
 
-  local MANIFESTTXT=./manifest.txt
+  local MANIFESTTXT=${ARTIFACTBASEDIR}/manifest.txt
 
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
   && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
