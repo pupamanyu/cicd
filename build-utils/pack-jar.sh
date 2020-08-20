@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 #Todo : remove hardcoded path
-cd /workspace/cicd/
+cd ${WORKSPACE}
 # Manifest related variables
 NAME="etls/evaluation/game-1"
 SPECTITLE="Game Event End to End ETL"
@@ -15,9 +15,8 @@ IMPLVENDOR="Example Company, Inc."
 WORKSPACEDIR="$(git rev-parse --show-toplevel)"
 ARTIFACTBASEDIR="${WORKSPACEDIR}/${NAME}"
 BAZELBINDIR="${WORKSPACEDIR}/bazel-bin"
-BAZELBINARTIFACTSDIR="${BAZELBINDIR}/etls/evaluation"
-ARTIFACTDIR="."
-ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
+BAZELBINARTIFACTSDIR="$(bazel info bazel-bin ${BAZELBINDIR}/etls/evaluation"
+
 
 gen_manifest() {
   echo -e "Name: ${NAME} \nSpecification-Title: ${SPECTITLE}\nSpecification-Version: ${SPECVERSION}\nSpecification-Vendor: ${SPECVENDOR}\nImplementation-Title: ${IMPLTITLE}\nImplementation-Version: ${IMPLVERSION}\nImplementation-Vendor: ${IMPLVENDOR}\n"
@@ -32,13 +31,13 @@ pack_jar() {
     echo "ARTIFACTBASEDIR .. ${ARTIFACTBASEDIR}"
     echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
   fi
-  cd ${BAZELBINARTIFACTSDIR} || echo "Path not set"
   
   local TEMPDIR="$(mktemp --directory)"
   local MANIFESTTXT="${TEMPDIR}/manifest.txt"
+  local ARTIFACTJARNAME="${TEMPDIR}/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
 
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
-  && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
+  && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} * \
   && echo "Artifact packed into a JAR successfully"
 }
 
