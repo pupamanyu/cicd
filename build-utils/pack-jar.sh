@@ -24,12 +24,15 @@ gen_manifest() {
 }
 
 pack_jar() {
-  cd ${BAZELBINARTIFACTSDIR}
-  local MANIFESTTXT=./manifest.txt
+  echo "WORKSPACEDIR ... ${WORKSPACEDIR}"
   echo "MANIFESTTXT frm outside.. ${MANIFESTTXT}"
   echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
   echo "ARTIFACTBASEDIR .. ${ARTIFACTBASEDIR}"
   echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
+  cd ${BAZELBINARTIFACTSDIR}
+
+  local MANIFESTTXT=./manifest.txt
+
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
   && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
   && echo "Artifact packed into a JAR successfully"
