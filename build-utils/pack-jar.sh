@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 #Todo : remove hardcoded path
-cd /Users/ext.gampapathini/Documents/cicd
+cd /workspace/cicd/
 # Manifest related variables
 NAME="etls/evaluation/game-1"
 SPECTITLE="Game Event End to End ETL"
