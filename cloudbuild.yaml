@@ -32,7 +32,7 @@ steps:
       [
         "build",
         "//etls/evaluation:game-event-jar",
-        "&& cat bazel-out/k8-fastbuild/bin/etls/evaluation/out.txt",
+        "--cat bazel-out/k8-fastbuild/bin/etls/evaluation/out.txt",
         "--verbose_failures",
         # Need service account to have IAM permissions for https://www.googleapis.com/auth/devstorage.read_write
 #        "--remote_http_cache=https://storbucket-nameage.googleapis.com/pramodrao-bazel-remote-cache",
