@@ -24,14 +24,18 @@ gen_manifest() {
 }
 
 pack_jar() {
-  echo "WORKSPACEDIR ... ${WORKSPACEDIR}"
-  echo "MANIFESTTXT frm outside.. ${MANIFESTTXT}"
-  echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
-  echo "ARTIFACTBASEDIR .. ${ARTIFACTBASEDIR}"
-  echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
+  local DEBUG=1
+  if [ ${DEBUG} -eq 1 ]; then 
+    echo "WORKSPACEDIR ... ${WORKSPACEDIR}"
+    echo "MANIFESTTXT from outside.. ${MANIFESTTXT}"
+    echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
+    echo "ARTIFACTBASEDIR .. ${ARTIFACTBASEDIR}"
+    echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
+  fi
   cd ${BAZELBINARTIFACTSDIR} || echo "Path not set"
-
-  local MANIFESTTXT=${BAZELBINARTIFACTSDIR}/manifest.txt
+  
+  local TEMPDIR="$(mktemp --directory)"
+  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
 
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
   && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
