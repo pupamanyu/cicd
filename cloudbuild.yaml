@@ -32,9 +32,10 @@ steps:
       [
         "build",
         "//etls/evaluation:game-event-jar",
+        "--verbose_failures",
         # Need service account to have IAM permissions for https://www.googleapis.com/auth/devstorage.read_write
-        "--remote_http_cache=https://storbucket-nameage.googleapis.com/pramodrao-bazel-remote-cache",
-        "--google_default_credentials",
+#        "--remote_http_cache=https://storbucket-nameage.googleapis.com/pramodrao-bazel-remote-cache",
+#        "--google_default_credentials",
       ]
     id: "build-dag-artifact"
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
