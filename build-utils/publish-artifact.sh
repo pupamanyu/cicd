@@ -33,8 +33,11 @@ copy_artifact_to_gcs() {
 }
 
 upload_jar_artifact() {
-    # TODO:test mvn deploy
-    mvn deploy:${ARTIFACTBUCKET}/${ARTIFACT}
+    # TODO:Update Jar name
+    gcloud alpha artifacts packages import ${ARTIFACTREPO} \
+        --location=${REGION} \
+        --gcs-source=${ARTIFACTBUCKET}/${ARTIFACT} &&
+        return 0
 }
 
 upload_deb_artifact() {
@@ -56,4 +59,4 @@ publish_jar_artifact() {
 }
 
 publish_deb_artifact
-publish_jar_artifact
+#publish_jar_artifact
