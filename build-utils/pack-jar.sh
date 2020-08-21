@@ -36,8 +36,8 @@ pack_jar() {
 #  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
   cd /workspace/cicd/bazel-bin/etls/evaluation
   local TEMPDIR="$(mktemp --directory)"
-#  local ARTIFACTJARNAME="${TEMPDIR}/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
-  local ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
+  local ARTIFACTJARNAME="${TEMPDIR}/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
+#  local ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
   echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
 
   local MANIFESTTXT="${TEMPDIR}/manifest.txt"
