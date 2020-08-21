@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 #Todo : remove hardcoded path
-cd ${WORKSPACE}
+cd /workspace/cicd/
 # Manifest related variables
 NAME="etls/evaluation/game-1"
 SPECTITLE="Game Event End to End ETL"
@@ -14,11 +14,13 @@ IMPLVENDOR="Example Company, Inc."
 # Artifact related variables
 WORKSPACEDIR="$(git rev-parse --show-toplevel)"
 ARTIFACTBASEDIR="${WORKSPACEDIR}/${NAME}"
-BAZELBINDIR="${WORKSPACEDIR}/bazel-bin"
-BAZELBINARTIFACTSDIR="$(bazel info bazel-bin ${BAZELBINDIR}/etls/evaluation"
+#BAZELBINDIR="${WORKSPACEDIR}/bazel-bin"
+#BAZELBINARTIFACTSDIR="$(bazel info bazel-bin ${BAZELBINDIR}/etls/evaluation"
+
 gen_manifest() {
   echo -e "Name: ${NAME} \nSpecification-Title: ${SPECTITLE}\nSpecification-Version: ${SPECVERSION}\nSpecification-Vendor: ${SPECVENDOR}\nImplementation-Title: ${IMPLTITLE}\nImplementation-Version: ${IMPLVERSION}\nImplementation-Vendor: ${IMPLVENDOR}\n"
 }
+
 pack_jar() {
   local DEBUG=1
   if [ ${DEBUG} -eq 1 ]; then
