@@ -2,6 +2,7 @@
 #
 #Todo : remove hardcoded path
 cd /workspace/cicd/
+#cd /Users/ext.gampapathini/Documents/cicd
 # Manifest related variables
 NAME="etls/evaluation/game-1"
 SPECTITLE="Game Event End to End ETL"
@@ -32,17 +33,16 @@ pack_jar() {
     echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
   fi
 
-#  local TEMPDIR="$(mktemp --directory)"
-#  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
-  cd /workspace/cicd/bazel-bin/etls/evaluation
   local TEMPDIR="$(mktemp --directory)"
+  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
+#  cd /workspace/cicd/bazel-bin/etls/evaluation
+#  cd /Users/ext.gampapathini/Documents/cicd/bazel-bin/etls/evaluation
   local ARTIFACTJARNAME="${TEMPDIR}/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
-#  local ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
+#  local ARTIFACTJARNAME="game-event_${SPECVERSION}_${IMPLVERSION}.jar"
   echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
 
-  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
-#  cd /tmp/bzl
-#  local MANIFESTTXT="./manifest.txt"
+
+  local MANIFESTTXT="./manifest.txt"
   echo "manifest .. ${MANIFESTTXT}"
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
   && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
