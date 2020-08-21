@@ -14,7 +14,7 @@ IMPLVENDOR="Example Company, Inc."
 # Artifact related variables
 WORKSPACEDIR="$(git rev-parse --show-toplevel)"
 ARTIFACTBASEDIR="${WORKSPACEDIR}/${NAME}"
-ARTIFACTDIR="."
+ARTIFACTDIR="game_event"
 BAZELBINDIR="${WORKSPACEDIR}/bazel-bin"
 BAZELBINARTIFACTSDIR="${BAZELBINDIR}/etls/evaluation"
 
@@ -38,7 +38,7 @@ pack_jar() {
   local TEMPDIR="$(mktemp --directory)"
   local ARTIFACTJARNAME="${TEMPDIR}/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
   echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
-
+  cd TEMPDIR
   local MANIFESTTXT="${TEMPDIR}/manifest.txt"
   echo "manifest .. ${MANIFESTTXT}"
   local ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
