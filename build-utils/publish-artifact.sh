@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # push artifact.sh
-
+cd /workspace/cicd/
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTBUCKET=gs://pramodrao-dataengg-avroload
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
