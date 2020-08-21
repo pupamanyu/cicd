@@ -41,6 +41,7 @@ pack_jar() {
   echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
 
 #  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
+  cd /tmp/bzl
   local MANIFESTTXT="./manifest.txt"
   echo "manifest .. ${MANIFESTTXT}"
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
