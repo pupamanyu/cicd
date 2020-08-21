@@ -41,7 +41,6 @@ pack_jar() {
   cd TEMPDIR
   local MANIFESTTXT="${TEMPDIR}/manifest.txt"
   echo "manifest .. ${MANIFESTTXT}"
-  local ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
   && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
   && echo "Artifact packed into a JAR successfully"
