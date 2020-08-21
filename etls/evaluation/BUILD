@@ -46,8 +46,8 @@ genrule(
 
 genrule(
     name = "game-event-jar",
-    srcs = ["//:build-utils/pack-jar.sh"],
+    srcs = ["//:build-utils/test.sh"],
     outs = ["out.txt"],
-    cmd = "$(location //:build-utils/pack-jar.sh)> $@ $(SRCS)"
+    cmd = "$(location //:build-utils/test.sh)> $@"
 
 )
