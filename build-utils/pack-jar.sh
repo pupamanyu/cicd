@@ -14,8 +14,8 @@ IMPLVENDOR="Example Company, Inc."
 # Artifact related variables
 WORKSPACEDIR="$(git rev-parse --show-toplevel)"
 ARTIFACTBASEDIR="${WORKSPACEDIR}/${NAME}"
-#BAZELBINDIR="${WORKSPACEDIR}/bazel-bin"
-#BAZELBINARTIFACTSDIR="$(bazel info bazel-bin ${BAZELBINDIR}/etls/evaluation"
+BAZELBINDIR="${WORKSPACEDIR}/bazel-bin"
+BAZELBINARTIFACTSDIR="${BAZELBINDIR}/etls/evaluation"
 
 gen_manifest() {
   echo -e "Name: ${NAME} \nSpecification-Title: ${SPECTITLE}\nSpecification-Version: ${SPECVERSION}\nSpecification-Vendor: ${SPECVENDOR}\nImplementation-Title: ${IMPLTITLE}\nImplementation-Version: ${IMPLVERSION}\nImplementation-Vendor: ${IMPLVENDOR}\n"
