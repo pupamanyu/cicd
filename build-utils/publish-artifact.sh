@@ -17,7 +17,7 @@ echo "pwd ... $(pwd)"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTBUCKET=gs://pramodrao-dataengg-avroload
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
-ARTIFACTDIR="/workspace/cicd/bazel-bin/etls/evaluation/jar"
+ARTIFACTDIR="/workspace/cicd/bazel-bin/etls/evaluation/"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 # TODO: This will be a JAR FILE for Maven Repo
 #ARTIFACT=game-event_1.0.0_amd64.deb
