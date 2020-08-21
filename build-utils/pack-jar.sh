@@ -42,7 +42,7 @@ pack_jar() {
   echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
 
 
-  local MANIFESTTXT="./manifest.txt"
+#  local MANIFESTTXT="./manifest.txt"
   echo "manifest .. ${MANIFESTTXT}"
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
   && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
