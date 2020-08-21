@@ -46,7 +46,6 @@ pack_jar() {
   echo "manifest .. ${MANIFESTTXT}"
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
   && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
-  && cp ${ARTIFACTJARNAME} /tmp/bazel/output \
   && echo "Artifact packed into a JAR successfully"
 }
 pack_jar
