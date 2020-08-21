@@ -45,9 +45,18 @@ genrule(
 )
 
 genrule(
+   name = "name",
+   cmd = "$(git rev-parse HEAD)",
+   outs = ["output.txt"]
+)
+
+genrule(
     name = "game-event-jar",
     srcs = ["//:build-utils/pack-jar.sh"],
-    outs = ["out.txt"],
+#    outs = ["out.txt"],
+    outs = {
+            'jar': "%{name}.jar",
+               },
     cmd = "$(location //:build-utils/pack-jar.sh)> $@"
 #    cmd = "$(location //:build-utils/pack-jar.sh)"
 
