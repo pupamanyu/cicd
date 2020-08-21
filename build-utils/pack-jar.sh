@@ -14,6 +14,7 @@ IMPLVENDOR="Example Company, Inc."
 # Artifact related variables
 WORKSPACEDIR="$(git rev-parse --show-toplevel)"
 ARTIFACTBASEDIR="${WORKSPACEDIR}/${NAME}"
+ARTIFACTDIR="."
 BAZELBINDIR="${WORKSPACEDIR}/bazel-bin"
 BAZELBINARTIFACTSDIR="${BAZELBINDIR}/etls/evaluation"
 
@@ -42,7 +43,7 @@ pack_jar() {
   echo "manifest .. ${MANIFESTTXT}"
   local ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
-  && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} * \
+  && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
   && echo "Artifact packed into a JAR successfully"
 }
 pack_jar
