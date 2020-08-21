@@ -31,9 +31,11 @@ pack_jar() {
     echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
   fi
 
-  local TEMPDIR="$(mktemp --directory)"
-  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
-  local ARTIFACTJARNAME="${TEMPDIR}/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
+#  local TEMPDIR="$(mktemp --directory)"
+#  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
+  cd BAZELBINARTIFACTSDIR
+  local MANIFESTTXT="./manifest.txt"
+  local ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
   && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} * \
   && echo "Artifact packed into a JAR successfully"
