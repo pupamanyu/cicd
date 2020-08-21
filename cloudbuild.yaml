@@ -25,13 +25,13 @@ steps:
         "https://github.com/pupamanyu/${REPO_NAME}",
       ]
     id: "check-out-source-code"
-  - name: "gcr.io/cloud-builders/bazel"
+  - name: "gcr.io/cloud-marketplace-containers/google/bazel"
     entrypoint: "bazel"
     dir: "${REPO_NAME}"
     args:
       [
+        "--output_base=/tmp/bzl",
         "build",
-        "output_base=/tmp/bzl",
         "//etls/evaluation:game-event-jar",
         "--verbose_failures",
         # Need service account to have IAM permissions for https://www.googleapis.com/auth/devstorage.read_write
