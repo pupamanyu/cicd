@@ -16,7 +16,7 @@ cd /workspace/cicd/
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTBUCKET=gs://pramodrao-dataengg-avroload
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
-ARTIFACTDIR="ls $(bazel info bazel-genfiles)"
+ARTIFACTDIR="/workspace/cicd/bazel-bin/etls/evaluation/jar"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 # TODO: This will be a JAR FILE for Maven Repo
 #ARTIFACT=game-event_1.0.0_amd64.deb
@@ -31,7 +31,7 @@ REGION=us-central1
 
 copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
-    echo "ARTIFACTDIR ... $(location %s).runfiles"
+#    echo "ARTIFACTDIR ... $(location %s).runfiles"
     gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET} &&
         return 0
 }
