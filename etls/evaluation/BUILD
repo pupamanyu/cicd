@@ -52,7 +52,7 @@ genrule(
 
 genrule(
     name = "game-event-jar",
-    srcs = ["//:build-utils/pack-jar.sh"],
+    tools = ["//:build-utils/pack-jar.sh"],
 #    outs = ["out.txt"],
     outs = {
             'jar': "%{name}.jar",
