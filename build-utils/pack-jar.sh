@@ -43,7 +43,6 @@ pack_jar() {
 
 
 #  local MANIFESTTXT="./manifest.txt"
-  echo "manifest .. ${MANIFESTTXT}"
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \
   && jar cmf ${MANIFESTTXT} ${ARTIFACTJARNAME} -C ${ARTIFACTBASEDIR} ${ARTIFACTDIR} \
   && echo "Artifact packed into a JAR successfully"
