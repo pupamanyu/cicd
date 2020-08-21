@@ -57,14 +57,6 @@ genrule(
     outs = {
             'jar': "%{name}.jar",
                },
-    content = [
-            "#!/bin/bash",
-            "case "$0" in",
-            "/*) self="$0" ;;",
-            "*)  self="$PWD/$0";;",
-            "esac",
-            "(cd $self.runfiles; java -cp %s %s)" % (cp, ctx.attr.main_class),
-        ],
     cmd = "$(location //:build-utils/pack-jar.sh)> $@"
 #    cmd = "$(location //:build-utils/pack-jar.sh)"
 
