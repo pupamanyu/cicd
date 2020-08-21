@@ -31,7 +31,7 @@ REGION=us-central1
 
 copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
-#    echo "ARTIFACTDIR ... $(location %s).runfiles"
+    echo "ARTIFACTDIR ... $(ls ${ARTIFACTDIR})"
     gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET} &&
         return 0
 }
