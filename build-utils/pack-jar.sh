@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 #Todo : remove hardcoded path
-cd /workspace/
+cd /workspace/cicd/
 #cd /Users/ext.gampapathini/Documents/cicd
 # Manifest related variables
 NAME="etls/evaluation/game-1"
