@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 #Todo : remove hardcoded path
-cd /workspace/cicd/
+cd /workspace/
 #cd /Users/ext.gampapathini/Documents/cicd
 # Manifest related variables
 NAME="etls/evaluation/game-1"
@@ -33,7 +33,7 @@ pack_jar() {
     echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
   fi
 
-  local TEMPDIR="$(mktemp --directory)"
+  local TEMPDIR="$(mktemp -d)"
   local MANIFESTTXT="${TEMPDIR}/manifest.txt"
 #  cd /workspace/cicd/bazel-bin/etls/evaluation
 #  cd /Users/ext.gampapathini/Documents/cicd/bazel-bin/etls/evaluation

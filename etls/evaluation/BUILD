@@ -44,20 +44,64 @@ genrule(
    outs = ["version.txt"]
 )
 
-genrule(
-   name = "name",
-   cmd = "$(git rev-parse HEAD)",
-   outs = ["output.txt"]
-)
+
+
+#genrule(
+#    name = "game-event-jar",
+#    srcs = ["//:build-utils/pack-jar.sh"],
+#    tools = ["//:build-utils/pack-jar.sh"],
+##    output_to_bindir = True,
+##    outs = ["out.txt"],
+#    outs = {
+#            'jar': "%{name}.jar",
+#               },
+##    outs = glob(["*.jar"]),jar
+#    cmd = "$(location //:build-utils/pack-jar.sh);echo $(location jar); [ -f '$(location jar)/*.jar' ] && echo 1 || echo 0 > $@"
+#
+##--ignore bazel-out --copy-files --output $(location jar)
+##    && gsutil cp -r $(location jar) gs://pramodrao-dataengg-avroload > $@"
+##    && gsutil -m cp $(location %s).runfiles %{name}.jar > $@"
+#
+##    cmd = "$(location //:build-utils/pack-jar.sh)"
+#
+#)
+
+#genrule(
+#   name = "copy",
+#   cmd = "gsutil -m cp $(location %s).runfiles %{name}.jar>@",
+#   outs = ["output.txt"],
+#   deps = [":game-event-jar"]
+#)
 
 genrule(
-    name = "game-event-jar",
+    name = "create-jar",
+    srcs = ["//:build-utils/pack-jar.sh"],
     tools = ["//:build-utils/pack-jar.sh"],
+#    output_to_genfiles=True,
+#    output_to_bindir = True,
 #    outs = ["out.txt"],
     outs = {
             'jar': "%{name}.jar",
                },
-    cmd = "$(location //:build-utils/pack-jar.sh)> $@"
-#    cmd = "$(location //:build-utils/pack-jar.sh)"
-
+#    outs = glob(["*.jar"]),jar
+    cmd = "$(location //:build-utils/pack-jar.sh) > $@"
 )
+
+
+#genrule(
+#    name = "copy_jar",
+#    srcs = [":create-jar"],
+#    outs = ["msgs.hh"],
+#    cmd = """
+#    gsutil cp -r $(SRCS) gs://pramodrao-dataengg-avroload
+#    """,
+#    visibility = ["//visibility:public"],
+#)
+
+#genrule(
+#    name = "copy_jar",
+#    srcs = [":create-jar"],
+#    outs = ["gs://pramodrao-dataengg-avroload"],
+#    output_to_bindir = 1,
+#    cmd = "cp $< $@",
+#)
