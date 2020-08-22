@@ -16,7 +16,7 @@ IMPLVENDOR="Example Company, Inc."
 WORKSPACEDIR="$(git rev-parse --show-toplevel)"
 ARTIFACTBASEDIR="${WORKSPACEDIR}/${NAME}"
 ARTIFACTDIR="game_event"
-BAZELBINDIR="bazel-bin"
+BAZELBINDIR="/tmp/bazel/output"
 BAZELBINARTIFACTSDIR="${BAZELBINDIR}/etls/evaluation"
 
 gen_manifest() {
