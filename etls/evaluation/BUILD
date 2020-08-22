@@ -78,7 +78,7 @@ genrule(
     srcs = ["//:build-utils/pack-jar.sh"],
     tools = ["//:build-utils/pack-jar.sh"],
 #    output_to_genfiles=True,
-#    output_to_bindir = True,
+    output_to_bindir = True,
 #    outs = ["out.txt"],
     outs = {
             'jar': "%{name}.jar",
