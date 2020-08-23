@@ -44,7 +44,7 @@ pack_jar() {
 #  local ARTIFACTJARNAME="${BAZELBINARTIFACTSDIR}/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
 #  local ARTIFACTJARNAME="game-event_${SPECVERSION}_${IMPLVERSION}.jar"
   echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
-  local ARTIFACTJARNAME="/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
+  local ARTIFACTJARNAME="game-event_${IMPLVERSION}_${SPECVERSION}.jar"
   cd ${EXECPATH}
   local MANIFESTTXT="./manifest.txt"
 
