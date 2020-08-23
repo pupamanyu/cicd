@@ -104,11 +104,11 @@ genrule(
 #    cmd = "$(location //:build-utils/pack-test-jar.sh) > $@"
     cmd = """
             #!/bin/bash
-            echo "path is ... $$(pwd)"
+            EXECPATH=$$(pwd)
             cd /workspace/cicd/
             IMPLVERSION="$$(git rev-parse HEAD)"
             SPECVERSION="$$(git rev-parse --abbrev-ref HEAD)"
-            
+            cd EXECPATH
 
 
             NAME="etls/evaluation/game-1"
