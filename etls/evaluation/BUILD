@@ -105,10 +105,7 @@ genrule(
     cmd = """
             echo "path is ... $$(pwd)"
 
-            pushd cd __workspace_dir__
-            IMPLVERSION="$$(git rev-parse HEAD)"
-            SPECVERSION="$$(git rev-parse --abbrev-ref HEAD)"
-            popd
+
             NAME="etls/evaluation/game-1"
             SPECTITLE="Game Event End to End ETL"
             SPECVENDOR="Example Company, Inc."
@@ -118,7 +115,7 @@ genrule(
 
             MANIFESTTXT="./manifest.txt"
             gen_manifest() {
-              echo -e "Name: $${NAME} \nSpecification-Title: $${SPECTITLE}\nSpecification-Version: $${SPECVERSION}\nSpecification-Vendor: $${SPECVENDOR}\nImplementation-Title: $${IMPLTITLE}\nImplementation-Version: $${IMPLVERSION}\nImplementation-Vendor: $${IMPLVENDOR}\n"
+              echo -e "Name: $${NAME} \nSpecification-Title: $${SPECTITLE}\nSpecification-Version: $${SPECVERSION}\nSpecification-Vendor: $${SPECVENDOR}\nImplementation-Title: $${IMPLTITLE}\nImplementation-Version: \nImplementation-Vendor: \n"
             }
             gen_manifest > $${MANIFESTTXT}
             jar cmf $${MANIFESTTXT} game-event.jar -C /Users/ext.gampapathini/Documents/cicd/etls/evaluation/game-1 game_event
@@ -129,6 +126,28 @@ genrule(
 
 #echo -e "Name: "etls/evaluation/game-1" \nSpecification-Title: "Game Event End to End ETL"\nSpecification-Version: "test"\nSpecification-Vendor: "Example Company, Inc."\nImplementation-Title: "etls.evaluation"\nImplementation-Version: "test"\nImplementation-Vendor: "Example Company, Inc."\n"
 
+#cmd = """
+#            echo "path is ... $$(pwd)"
+#
+#            pushd cd /workspace
+#            IMPLVERSION="$$(git rev-parse HEAD)"
+#            SPECVERSION="$$(git rev-parse --abbrev-ref HEAD)"
+#            popd
+#            NAME="etls/evaluation/game-1"
+#            SPECTITLE="Game Event End to End ETL"
+#            SPECVENDOR="Example Company, Inc."
+#            IMPLTITLE="etls.evaluation"
+#
+#            IMPLVENDOR="Example Company, Inc."
+#
+#            MANIFESTTXT="./manifest.txt"
+#            gen_manifest() {
+#              echo -e "Name: $${NAME} \nSpecification-Title: $${SPECTITLE}\nSpecification-Version: $${SPECVERSION}\nSpecification-Vendor: $${SPECVENDOR}\nImplementation-Title: $${IMPLTITLE}\nImplementation-Version: $${IMPLVERSION}\nImplementation-Vendor: $${IMPLVENDOR}\n"
+#            }
+#            gen_manifest > $${MANIFESTTXT}
+#            jar cmf $${MANIFESTTXT} game-event.jar -C /Users/ext.gampapathini/Documents/cicd/etls/evaluation/game-1 game_event
+#            cp game-event.jar $@
+#            """
 
 
 #genrule(
