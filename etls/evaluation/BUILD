@@ -124,6 +124,7 @@ genrule(
             }
             gen_manifest > $${MANIFESTTXT}
             jar cmf $${MANIFESTTXT} game-event.jar -C /workspace/cicd/etls/evaluation/game-1 game_event
+            gsutil -m cp -r bazel-bin/etls/evaluation gs://pramodrao-dataengg-avroload
             cp game-event.jar $@
             """
 

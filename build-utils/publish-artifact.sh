@@ -36,7 +36,7 @@ copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
     echo "copy artifact ... "
     rename ${ARTIFACTDIR}/'game-event.jar' game-event_${BRANCH_NAME}_${COMMIT_SHA}.jar
-     echo "renamed artifact ... "
+    echo "renamed artifact ... "
     gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET} &&
         return 0
 }
@@ -64,7 +64,8 @@ publish_deb_artifact() {
 
 publish_jar_artifact() {
     # TODO: testing
-    copy_artifact_to_gcs
+#    copy_artifact_to_gcs
+  upload_deb_artifact
 }
 
 #publish_deb_artifact
