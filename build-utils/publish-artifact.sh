@@ -14,7 +14,7 @@
 # push artifact.sh
 #cd $(git rev-parse --show-toplevel)
 cd /workspace/cicd
-echo "pwd ... $(pwd)"
+#echo "pwd ... $(pwd)"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTBUCKET=gs://pramodrao-dataengg-avroload
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
