@@ -103,7 +103,7 @@ genrule(
     outs = ["game-event.jar"],
 #    cmd = "$(location //:build-utils/pack-test-jar.sh) > $@"
     cmd = """
-            pushd cd /workspace/cicd/
+            pushd cd /workspace
             IMPLVERSION="$$(git rev-parse HEAD)"
             SPECVERSION="$$(git rev-parse --abbrev-ref HEAD)"
             popd
