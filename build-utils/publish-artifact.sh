@@ -42,7 +42,7 @@ copy_artifact_to_gcs() {
 upload_jar_artifact() {
   echo "upload jar artifact to Artifact registry ... "
     # TODO:test mvn deploy
-    gcloud alpha artifacts --quiet packages import ${ARTIFACTREPO} \
+    gcloud alpha artifacts packages import --quiet ${ARTIFACTREPO} \
         --location=${REGION} \
         --gcs-source=${ARTIFACTBUCKET}/${ARTIFACT} &&
         return 0
