@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # push artifact.sh
-cd $(git rev-parse --show-toplevel)
-
+#cd $(git rev-parse --show-toplevel)
+cd /workspace/cicd
 echo "pwd ... $(pwd)"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTBUCKET=gs://pramodrao-dataengg-avroload
@@ -39,7 +39,7 @@ copy_artifact_to_gcs() {
     cp ${ARTIFACTDIR}/${ARTIFACT} ${TEMPDIR}/
     rename ${TEMPDIR}/${ARTIFACTDIR}/${ARTIFACT} game-event_${BRANCH_NAME}_${COMMIT_SHA}.jar
     echo "renamed artifact ... "
-    gsutil -m cp ${TEMPDIR}/${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET} &&
+    gsutil -m cp ${TEMPDIR}/${ARTIFACTDIR}/ ${ARTIFACTBUCKET} &&
         return 0
 }
 
