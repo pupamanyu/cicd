@@ -61,7 +61,7 @@ publish_deb_artifact() {
 
 publish_jar_artifact() {
     # TODO: testing
-    copy_artifact_to_gcs && upload_jar_artifact
+    copy_artifact_to_gcs
 }
 
 #publish_deb_artifact
