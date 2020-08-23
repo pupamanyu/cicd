@@ -103,7 +103,6 @@ genrule(
     outs = ["game-event.jar"],
 #    cmd = "$(location //:build-utils/pack-test-jar.sh) > $@"
     cmd = """
-            #!/bin/bash
             EXECPATH=$$(pwd)
             cd /workspace/cicd/
             IMPLVERSION="$$(git rev-parse HEAD)"
@@ -124,6 +123,7 @@ genrule(
             }
             gen_manifest > $${MANIFESTTXT}
             jar cmf $${MANIFESTTXT} game-event.jar -C /workspace/cicd/etls/evaluation/game-1 game_event
+            gsutil -m cp -r game-event.jar gs://pramodrao-dataengg-avroload
             cp game-event.jar $@
             """
 
