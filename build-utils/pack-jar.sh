@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 #Todo : remove hardcoded path
+EXECPATH=$(pwd)
 cd /workspace/cicd/
 #cd /Users/ext.gampapathini/Documents/cicd
 # Manifest related variables
@@ -33,16 +34,19 @@ pack_jar() {
     echo "ARTIFACTDIR .. ${ARTIFACTDIR}"
   fi
 
-  local TEMPDIR="$(mktemp -d)"
-  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
+
+#  local TEMPDIR="$(mktemp -d)"
+#  local MANIFESTTXT="${TEMPDIR}/manifest.txt"
 #  local MANIFESTTXT="${BAZELBINARTIFACTSDIR}/manifest.txt"
 #  cd /workspace/cicd/bazel-bin/etls/evaluation
 #  cd /Users/ext.gampapathini/Documents/cicd/bazel-bin/etls/evaluation
-  local ARTIFACTJARNAME="${TEMPDIR}/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
+
 #  local ARTIFACTJARNAME="${BAZELBINARTIFACTSDIR}/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
 #  local ARTIFACTJARNAME="game-event_${SPECVERSION}_${IMPLVERSION}.jar"
   echo "ARTIFACTJARNAME .. ${ARTIFACTJARNAME}"
-
+  local ARTIFACTJARNAME="/game-event_${IMPLVERSION}_${SPECVERSION}.jar"
+  cd ${EXECPATH}
+  local MANIFESTTXT="./manifest.txt"
 
 #  local MANIFESTTXT="./manifest.txt"
   gen_manifest > ${MANIFESTTXT} 2> /dev/null \

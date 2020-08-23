@@ -56,7 +56,7 @@ genrule(
             'jar': "%{name}.jar",
                },
 #    outs = glob(["*.jar"]),jar
-    cmd = "$(location //:build-utils/pack-jar.sh);echo $(location jar); [ -f '$(location jar)/*.jar' ] && echo 1 || echo 0 > $@"
+    cmd = "$(location //:build-utils/pack-jar.sh) > $@"
 
 #--ignore bazel-out --copy-files --output $(location jar)
 #    && gsutil cp -r $(location jar) gs://pramodrao-dataengg-avroload > $@"
