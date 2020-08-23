@@ -74,18 +74,59 @@ genrule(
 #)
 
 genrule(
-    name = "create-jar",
-    srcs = ["//:build-utils/pack-jar.sh"],
-    tools = ["//:build-utils/pack-jar.sh"],
+    name = "create-manifest",
+    srcs = [],
+#    tools = ["//:build-utils/manifest.sh"],
 #    output_to_genfiles=True,
     output_to_bindir = True,
-#    outs = ["out.txt"],
-    outs = {
-            'jar': "%{name}.jar",
-               },
-#    outs = glob(["*.jar"]),jar
-    cmd = "$(location //:build-utils/pack-jar.sh) > $@"
+#    outs = { : "%{name}.jar",},
+#    outs = {
+#            'jar': "%{name}.jar",
+#               },
+    outs = ["MANIFEST.txt"],
+#    cmd = "$(location //:build-utils/pack-test-jar.sh) > $@"
+#    cmd = "$(location //:build-utils/manifest.sh) > $@"
+    cmd = 'echo -e "Name: "etls/evaluation/game-1" \nSpecification-Title: "Game Event End to End ETL"\nSpecification-Version: "test"\nSpecification-Vendor: "Example Company, Inc."\nImplementation-Title: "etls.evaluation"\nImplementation-Version: "test"\nImplementation-Vendor: "Example Company, Inc."\n"> $@'
+
 )
+
+genrule(
+    name = "create-jar",
+#    srcs = [":create-manifest"],
+#    tools = ["//:build-utils/pack-test-jar.sh"],
+#    output_to_genfiles=True,
+    output_to_bindir = True,
+#    outs = { : "%{name}.jar",},
+#    outs = {
+#            'jar': "%{name}.jar",
+#               },
+    outs = ["game-event.jar"],
+#    cmd = "$(location //:build-utils/pack-test-jar.sh) > $@"
+    cmd = """
+            pushd cd /workspace/cicd/
+            IMPLVERSION="$$(git rev-parse HEAD)"
+            SPECVERSION="$$(git rev-parse --abbrev-ref HEAD)"
+            popd
+            NAME="etls/evaluation/game-1"
+            SPECTITLE="Game Event End to End ETL"
+            SPECVENDOR="Example Company, Inc."
+            IMPLTITLE="etls.evaluation"
+
+            IMPLVENDOR="Example Company, Inc."
+
+            MANIFESTTXT="./manifest.txt"
+            gen_manifest() {
+              echo -e "Name: $${NAME} \nSpecification-Title: $${SPECTITLE}\nSpecification-Version: $${SPECVERSION}\nSpecification-Vendor: $${SPECVENDOR}\nImplementation-Title: $${IMPLTITLE}\nImplementation-Version: $${IMPLVERSION}\nImplementation-Vendor: $${IMPLVENDOR}\n"
+            }
+            gen_manifest > $${MANIFESTTXT}
+            jar cmf $${MANIFESTTXT} game-event.jar -C /Users/ext.gampapathini/Documents/cicd/etls/evaluation/game-1 game_event
+            cp game-event.jar $@
+            """
+
+)
+
+#echo -e "Name: "etls/evaluation/game-1" \nSpecification-Title: "Game Event End to End ETL"\nSpecification-Version: "test"\nSpecification-Vendor: "Example Company, Inc."\nImplementation-Title: "etls.evaluation"\nImplementation-Version: "test"\nImplementation-Vendor: "Example Company, Inc."\n"
+
 
 
 #genrule(
@@ -104,4 +145,12 @@ genrule(
 #    outs = ["gs://pramodrao-dataengg-avroload"],
 #    output_to_bindir = 1,
 #    cmd = "cp $< $@",
+#)
+
+#genrule(
+#    name = "create-jar",
+#    srcs = [],
+#    outs = ["test.jar"],
+#    cmd = "./$(location //:build-utils/pack-test-jar.sh) > \"$@\"",
+#    tools = ["//:build-utils/pack-test-jar.sh"],
 #)
