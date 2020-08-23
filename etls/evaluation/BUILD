@@ -123,8 +123,8 @@ genrule(
               echo -e "Name: $${NAME} \nSpecification-Title: $${SPECTITLE}\nSpecification-Version: \nSpecification-Vendor: $${SPECVENDOR}\nImplementation-Title: $${IMPLTITLE}\nImplementation-Version: \nImplementation-Vendor: \n"
             }
             gen_manifest > $${MANIFESTTXT}
-            jar cmf $${MANIFESTTXT} game-event.jar -C /workspace/cicd/etls/evaluation/game-1 game_event
-            cp game-event.jar $@
+            jar cmf $${MANIFESTTXT} $${JARNAME} -C /workspace/cicd/etls/evaluation/game-1 game_event
+            cp $${JARNAME} $@
             """
 
 )
