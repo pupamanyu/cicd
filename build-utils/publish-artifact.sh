@@ -23,16 +23,17 @@ ARTIFACTDIR="/workspace/cicd/bazel-bin/etls/evaluation/"
 #ARTIFACT=game-event_1.0.0_amd64.deb
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 COMMIT_SHA=$(git rev-parse HEAD)
-ARTIFACT=game-event_${BRANCH_NAME}_${COMMIT_SHA}.jar
+#ARTIFACT=game-event_${BRANCH_NAME}_${COMMIT_SHA}.jar
+ARTIFACT=rename 'game-event.jar' game-event_${BRANCH_NAME}_${COMMIT_SHA}.jar
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 # TODO: This will be a new repo for Maven Repo
-ARTIFACTREPO=artifact-repo
+ARTIFACTREPO=testrepo
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 REGION=us-central1
 
 copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
-    echo "ARTIFACTDIR ... $(ls ${ARTIFACTDIR})"
+    echo "copy artifact ... )"
     gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET} &&
         return 0
 }
