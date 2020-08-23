@@ -46,25 +46,25 @@ genrule(
 
 
 
-#genrule(
-#    name = "game-event-jar",
-#    srcs = ["//:build-utils/pack-jar.sh"],
-#    tools = ["//:build-utils/pack-jar.sh"],
-##    output_to_bindir = True,
-##    outs = ["out.txt"],
-#    outs = {
-#            'jar': "%{name}.jar",
-#               },
-##    outs = glob(["*.jar"]),jar
-#    cmd = "$(location //:build-utils/pack-jar.sh);echo $(location jar); [ -f '$(location jar)/*.jar' ] && echo 1 || echo 0 > $@"
-#
-##--ignore bazel-out --copy-files --output $(location jar)
-##    && gsutil cp -r $(location jar) gs://pramodrao-dataengg-avroload > $@"
-##    && gsutil -m cp $(location %s).runfiles %{name}.jar > $@"
-#
-##    cmd = "$(location //:build-utils/pack-jar.sh)"
-#
-#)
+genrule(
+    name = "game-event-jar",
+    srcs = ["//:build-utils/pack-jar.sh"],
+    tools = ["//:build-utils/pack-jar.sh"],
+#    output_to_bindir = True,
+#    outs = ["out.txt"],
+    outs = {
+            'jar': "%{name}.jar",
+               },
+#    outs = glob(["*.jar"]),jar
+    cmd = "$(location //:build-utils/pack-jar.sh);echo $(location jar); [ -f '$(location jar)/*.jar' ] && echo 1 || echo 0 > $@"
+
+#--ignore bazel-out --copy-files --output $(location jar)
+#    && gsutil cp -r $(location jar) gs://pramodrao-dataengg-avroload > $@"
+#    && gsutil -m cp $(location %s).runfiles %{name}.jar > $@"
+
+#    cmd = "$(location //:build-utils/pack-jar.sh)"
+
+)
 
 #genrule(
 #   name = "copy",
@@ -104,7 +104,8 @@ genrule(
 #    cmd = "$(location //:build-utils/pack-test-jar.sh) > $@"
     cmd = """
             echo "path is ... $$(pwd)"
-            pushd cd /workspace/cicd/
+
+            pushd cd __workspace_dir__
             IMPLVERSION="$$(git rev-parse HEAD)"
             SPECVERSION="$$(git rev-parse --abbrev-ref HEAD)"
             popd
