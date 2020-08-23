@@ -35,11 +35,12 @@ REGION=us-central1
 copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
     echo "copy artifact ... "
-    gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET} &&
-        return 0
+    gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET}
+    echo "copy artifact ... complete"
 }
 
 upload_jar_artifact() {
+  echo "upload jar artifact to Artifact registry ... "
     # TODO:test mvn deploy
     gcloud alpha artifacts packages import ${ARTIFACTREPO} \
         --quiet, -q
