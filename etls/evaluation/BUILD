@@ -108,7 +108,7 @@ genrule(
             cd /workspace/cicd/
             IMPLVERSION="$$(git rev-parse HEAD)"
             SPECVERSION="$$(git rev-parse --abbrev-ref HEAD)"
-            cd EXECPATH
+            cd $${EXECPATH}
 
 
             NAME="etls/evaluation/game-1"
