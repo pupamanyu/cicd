@@ -105,10 +105,10 @@ genrule(
     cmd = """
             #!/bin/bash
             echo "path is ... $$(pwd)"
-            pushd cd /workspace/cicd/;
+            cd /workspace/cicd/
             IMPLVERSION="$$(git rev-parse HEAD)"
             SPECVERSION="$$(git rev-parse --abbrev-ref HEAD)"
-            popd
+            
 
 
             NAME="etls/evaluation/game-1"
