@@ -107,6 +107,7 @@ genrule(
             cd /workspace/cicd/
             IMPLVERSION="$$(git rev-parse HEAD)"
             SPECVERSION="$$(git rev-parse --abbrev-ref HEAD)"
+            JARNAME="game-event_$${SPECVERSION}_$${SPECVERSION}"
             cd $${EXECPATH}
 
 
@@ -123,7 +124,6 @@ genrule(
             }
             gen_manifest > $${MANIFESTTXT}
             jar cmf $${MANIFESTTXT} game-event.jar -C /workspace/cicd/etls/evaluation/game-1 game_event
-            gsutil -m cp -r game-event.jar gs://pramodrao-dataengg-avroload
             cp game-event.jar $@
             """
 
