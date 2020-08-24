@@ -33,9 +33,9 @@ pkg_deb(
     ],
     description = "Debian container package encapsulating airflow dags inside data tar ball for publishing to package registry",
     homepage = "http://bazel.build",
-    maintainer = "The Authors <authors@customer.com>",
+    maintainer = "authors@customer.com",
     package = "game-event",
-    version = "1.0.0",
+    version = '1.0.0',
 )
 
 genrule(

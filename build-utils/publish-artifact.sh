@@ -70,5 +70,5 @@ publish_jar_artifact() {
   upload_jar_artifact
 }
 
-#publish_deb_artifact
-publish_jar_artifact
+publish_deb_artifact
+#publish_jar_artifact
