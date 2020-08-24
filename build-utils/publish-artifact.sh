@@ -53,7 +53,6 @@ upload_jar_artifact() {
 upload_deb_artifact() {
     # Upload deb artifact to artifact registry
     gcloud alpha artifacts packages import ${ARTIFACTREPO} \
-        --quiet, -q
         --location=${REGION} \
         --gcs-source=${ARTIFACTBUCKET}/${ARTIFACT} &&
         return 0
