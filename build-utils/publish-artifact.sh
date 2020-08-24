@@ -29,7 +29,7 @@ COMMIT_SHA=$(git rev-parse HEAD)
 ARTIFACT="game-event_1.0.0_amd64.deb"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 # TODO: This will be a new repo for Maven Repo
-ARTIFACTREPO=testrepo
+ARTIFACTREPO=artifact-repo
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 REGION=us-central1
 
