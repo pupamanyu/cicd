@@ -5,18 +5,52 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>bazel</artifactId>
+    <groupId>1.0</groupId>
+    <version>1.0-SNAPSHOT</version>
     <name>bazel</name>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <parent>
-        <groupId>com.baeldung</groupId>
-        <artifactId>parent-modules</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
+<!--    <build>-->
+<!--        <plugin>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-jar-plugin</artifactId>-->
+<!--            <version>2.4</version>-->
+<!--            <executions>-->
+<!--                <execution>-->
+<!--                    <id>default</id>-->
+<!--                    <phase>package</phase>-->
+<!--                    <goals>-->
+<!--                        <goal>jar</goal>-->
+<!--                    </goals>-->
+<!--                    <configuration>-->
+<!--                        <classesDirectory>/Users/ext.gampapathini/Documents/cicd/etls/evaluation/game-1/game_event</classesDirectory>-->
+<!--                    </configuration>-->
+<!--                </execution>-->
+<!--            </executions>-->
+<!--        </plugin>-->
+<!--    </build>-->
 
-    <modules>
-        <module>bazelgreeting</module>
-        <module>bazelapp</module>
-    </modules>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>artifact-registry</id>
+            <url>https://us-central1-maven.pkg.dev/pramodrao-dataengg-workshop/maven-repo</url>
+        </snapshotRepository>
+        <repository>
+            <id>artifact-registry</id>
+            <url>https://us-central1-maven.pkg.dev/pramodrao-dataengg-workshop/maven-repo</url>
+        </repository>
+    </distributionManagement>
 
+    <repositories>
+        <repository>
+            <id>artifact-registry</id>
+            <url>https://us-central1-maven.pkg.dev/pramodrao-dataengg-workshop/maven-repo</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
