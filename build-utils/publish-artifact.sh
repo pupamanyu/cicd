@@ -44,7 +44,7 @@ copy_artifact_to_gcs() {
 upload_jar_artifact() {
   echo "upload deb artifact to gcs ... "
     # TODO:test mvn deploy
-    gcloud alpha artifacts packages import --quiet ${ARTIFACTREPO} \
+    gcloud alpha artifacts packages import ${ARTIFACTREPO} \
         --location=${REGION} \
         --gcs-source=${ARTIFACTBUCKET}/${ARTIFACT} &&
         return 0
@@ -53,7 +53,7 @@ upload_jar_artifact() {
 upload_deb_artifact() {
     # Upload deb artifact to artifact registry
     echo "upload deb artifact to Artifact registry ... "
-    gcloud alpha artifacts packages import ${ARTIFACTREPO} \
+    gcloud alpha artifacts packages import ${ARTIFACTREPO} --quiet \
         --location=${REGION} \
         --gcs-source=${ARTIFACTBUCKET}/${ARTIFACT} &&
         return 0
