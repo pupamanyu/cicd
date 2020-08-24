@@ -13,6 +13,7 @@
 # limitations under the License.
 # push artifact.sh
 #cd $(git rev-parse --show-toplevel)
+EXECPATH=$(pwd)
 cd /workspace/cicd
 #echo "pwd ... $(pwd)"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
@@ -34,8 +35,9 @@ REGION=us-central1
 
 copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
+    cd  ${EXECPATH}
     echo "copy artifact ... "
-    gsutil -m cp ${ARTIFACTDIR} ${ARTIFACTBUCKET}
+    gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET}
     echo "copy artifact ... complete"
 }
 
