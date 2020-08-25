@@ -27,6 +27,7 @@ BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 COMMIT_SHA=$(git rev-parse HEAD)
 #ARTIFACT=game-event_${BRANCH_NAME}_${COMMIT_SHA}.jar
 ARTIFACT="game-event.deb"
+RENAMED="game_event_${BRANCH_NAME}_${COMMIT_SHA}.deb"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 # TODO: This will be a new repo for Maven Repo
 ARTIFACTREPO=artifact-repo
@@ -37,9 +38,10 @@ copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
     cd  ${EXECPATH}
     mkdir Debfile && cp ${ARTIFACTDIR}/${ARTIFACT} Debfile
-    echo "copy artifact ... "
-    gsutil -m cp ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTBUCKET}
-    echo "copy artifact ... complete"
+    mv Debfile/${ARTIFACT} ${RENAMED}
+    echo "rename artifact complete... "
+    gsutil -m cp Debfile/${RENAMED} ${ARTIFACTBUCKET}
+    echo "copy artifact to artifact registry... complete"
 }
 
 upload_jar_artifact() {
