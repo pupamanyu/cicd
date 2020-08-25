@@ -26,7 +26,7 @@ ARTIFACTDIR="bazel-bin/etls/evaluation"
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 COMMIT_SHA=$(git rev-parse HEAD)
 #ARTIFACT=game-event_${BRANCH_NAME}_${COMMIT_SHA}.jar
-ARTIFACT="game-event_1.0.0_amd64.deb"
+ARTIFACT="game-event.deb"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 # TODO: This will be a new repo for Maven Repo
 ARTIFACTREPO=artifact-repo
