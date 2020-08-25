@@ -33,7 +33,7 @@ pkg_deb(
         "unzip",
         ":bash-completion",
     ],
-    description = "Debian container package encapsulating airflow dags inside data tar ball for publishing to package registry",
+    description = "test",
     homepage = "http://bazel.build",
     maintainer = "authors@customer.com",
     package = "game-event",
@@ -46,7 +46,8 @@ genrule(
    outs = ["version.txt"],
    cmd = """
    EXECPATH=$$(pwd)
-         cd /workspace/cicd
+
+        cd /workspace/cicd
          IMPLVERSION="$$(git rev-parse HEAD)"
          cd $${EXECPATH}
 
@@ -56,7 +57,7 @@ genrule(
 
 )
 
-
+#cd /Users/ext.gampapathini/Documents/cicd
 
 genrule(
     name = "game-event-jar",
