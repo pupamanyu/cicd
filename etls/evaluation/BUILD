@@ -46,7 +46,7 @@ genrule(
    outs = ["version.txt"],
    cmd = """
    EXECPATH=$$(pwd)
-         cd /Users/ext.gampapathini/Documents/cicd
+         cd /workspace/cicd
          IMPLVERSION="$$(git rev-parse HEAD)"
          cd $${EXECPATH}
 
