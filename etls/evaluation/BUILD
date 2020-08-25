@@ -16,6 +16,7 @@ package(default_visibility = ["//visibility:public"])
 
 load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
 
+
 pkg_tar(
     name = "game-event-dag",
     srcs = ["//etls/evaluation:game-1/game_event"],
@@ -30,18 +31,29 @@ pkg_deb(
     depends = [
         "zlib1g-dev",
         "unzip",
+        ":bash-completion",
     ],
     description = "Debian container package encapsulating airflow dags inside data tar ball for publishing to package registry",
     homepage = "http://bazel.build",
     maintainer = "authors@customer.com",
     package = "game-event",
-    version = '1.0.1',
+    version_file = ":version.txt",
+#    version = my_name
 )
 
 genrule(
-   name = "version",
-   cmd = "$(git rev-parse HEAD)",
-   outs = ["version.txt"]
+   name = "embeded_label",
+   outs = ["version.txt"],
+   cmd = """
+   EXECPATH=$$(pwd)
+         cd /Users/ext.gampapathini/Documents/cicd
+         IMPLVERSION="$$(git rev-parse HEAD)"
+         cd $${EXECPATH}
+
+         VERSIONTXT="./version.txt"
+         echo -e $${IMPLVERSION} > VERSIONTXT > $@
+        """
+
 )
 
 
