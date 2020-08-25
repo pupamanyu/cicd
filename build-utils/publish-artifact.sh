@@ -17,15 +17,13 @@ EXECPATH=$(pwd)
 cd /workspace/cicd
 #echo "pwd ... $(pwd)"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
-ARTIFACTBUCKET=gs://pramodrao-dataengg-avroload
+ARTIFACTBUCKET=gs://lor-data-platform-dev-gouri/staging
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTDIR="bazel-bin/etls/evaluation"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 # TODO: This will be a JAR FILE for Maven Repo
-#ARTIFACT=game-event_1.0.0_amd64.deb
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 COMMIT_SHA=$(git rev-parse HEAD)
-#ARTIFACT=game-event_${BRANCH_NAME}_${COMMIT_SHA}.jar
 ARTIFACT="game-event.deb"
 RENAMED="game_event_${BRANCH_NAME}_${COMMIT_SHA}.deb"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
@@ -33,24 +31,17 @@ RENAMED="game_event_${BRANCH_NAME}_${COMMIT_SHA}.deb"
 ARTIFACTREPO=artifact-repo
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 REGION=us-central1
+#COMPOSERENV="gs://us-central1-stage-env-a3819b6c-bucket/dags"
 
 copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
     cd  ${EXECPATH}
-#    mkdir Debfile && cp ${ARTIFACTDIR}/${ARTIFACT} Debfile
     mv ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTDIR}/${RENAMED}
     echo "rename artifact complete... "
     gsutil -m cp ${ARTIFACTDIR}/${RENAMED} ${ARTIFACTBUCKET}
     echo "copy artifact to artifact registry... complete"
-}
-
-upload_jar_artifact() {
-  echo "upload deb artifact to gcs ... "
-    # TODO:test mvn deploy
-    gcloud alpha artifacts packages import ${ARTIFACTREPO} \
-        --location=${REGION} \
-        --gcs-source=${ARTIFACTBUCKET}/${ARTIFACT} &&
-        return 0
+#    gsutil -m cp ${ARTIFACTDIR}/${RENAMED} ${COMPOSERENV}
+#    echo "copy artifact to dags folder... complete"
 }
 
 upload_deb_artifact() {
@@ -67,11 +58,5 @@ publish_deb_artifact() {
     copy_artifact_to_gcs && upload_deb_artifact
 }
 
-publish_jar_artifact() {
-    # TODO: testing
-    copy_artifact_to_gcs
-  upload_jar_artifact
-}
 
 publish_deb_artifact
-#publish_jar_artifact
