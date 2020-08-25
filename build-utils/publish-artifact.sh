@@ -38,9 +38,9 @@ copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
     cd  ${EXECPATH}
 #    mkdir Debfile && cp ${ARTIFACTDIR}/${ARTIFACT} Debfile
-    mv ${ARTIFACT} ${RENAMED}
+    mv ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTDIR}/${RENAMED}
     echo "rename artifact complete... "
-    gsutil -m cp ${RENAMED} ${ARTIFACTBUCKET}
+    gsutil -m cp ${ARTIFACTDIR}/${RENAMED} ${ARTIFACTBUCKET}
     echo "copy artifact to artifact registry... complete"
 }
 
