@@ -3,7 +3,7 @@
 echo $(pwd)
 # upload var files for dependecies
 COMPOSER_DATA_FOLDER="/home/airflow/gcs/data"
-COMPOSER_NAME="cherc"
+COMPOSER_NAME="dev-env"
 COMPOSER_LOCATION="us-central1"
 ENV_VARIABLES_JSON_FILE="etls/evaluation/game-1/game_event/workflow-dag/config/variables.json"
 echo $COMPOSER_DATA_FOLDER
