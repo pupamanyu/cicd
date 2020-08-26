@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 echo $(pwd)
+cd /workspace/cicd
 # upload var files for dependecies
 COMPOSER_DATA_FOLDER="/home/airflow/gcs/data"
 COMPOSER_NAME="dev-env"
@@ -19,3 +20,5 @@ $(gcloud composer environments run ${COMPOSER_NAME} \
     -i ${COMPOSER_DATA_FOLDER}/variables.json)
 
 echo "Loaded variables into airflow"
+
+#gcloud composer environments describe dev-env --location us-central1 | grep 'dagGcsPrefix' | grep -Eo "\S+/"
