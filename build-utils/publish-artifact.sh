@@ -17,8 +17,8 @@ EXECPATH=$(pwd)
 cd /workspace/cicd
 #echo "pwd ... $(pwd)"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
-#ARTIFACTBUCKET=gs://lor-data-platform-dev-gouri/staging
-ARTIFACTBUCKET=gs://pramodrao-dataengg-workshop
+ARTIFACTBUCKET=gs://lor-data-platform-dev-gouri/staging
+#ARTIFACTBUCKET=gs://pramodrao-dataengg-workshop
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTDIR="bazel-bin/etls/evaluation"
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
