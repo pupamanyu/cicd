@@ -4,7 +4,7 @@ echo $(pwd)
 cd /workspace/cicd
 # upload var files for dependecies
 COMPOSER_DATA_FOLDER="/home/airflow/gcs/data"
-COMPOSER_NAME="dev-env"
+COMPOSER_NAME="staging-data-pipeline-composer"
 COMPOSER_LOCATION="us-central1"
 ENV_VARIABLES_JSON_FILE="etls/evaluation/game-1/game_event/workflow-dag/config/variables.json"
 echo $COMPOSER_DATA_FOLDER
@@ -21,4 +21,4 @@ $(gcloud composer environments run ${COMPOSER_NAME} \
 
 echo "Loaded variables into airflow"
 
-#gcloud composer environments describe dev-env --location us-central1 | grep 'dagGcsPrefix' | grep -Eo "\S+/"
+#gcloud composer environments describe staging-data-pipeline-composer --location us-central1 | grep 'dagGcsPrefix' | grep -Eo "\S+/"

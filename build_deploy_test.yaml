@@ -1,0 +1,91 @@
+# Copyright 2020 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# TODO: to look at possibility of using global environment variables for some of the step parameters
+
+
+steps:
+  # Build the dpkg_parser PAR file
+  # this binary is used by the package manager rules
+  # to download debian package lists and debian packages
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "git"
+    args: ["clone","--single-branch",
+           "--branch","${BRANCH_NAME}",
+           "https://github.com/pupamanyu/${REPO_NAME}",]
+    id: 'check-out-source-code'
+
+  - name: "gcr.io/cloud-builders/bazel:latest"
+    args: [
+      'build', '//etls/evaluation:game-event',
+    ]
+    id: 'build-jar'
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "bash"
+    args: ["build-utils/publish-artifact.sh"]
+    id: 'publish-artifact'
+
+  - name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
+    entrypoint: 'python'
+    args: ['test_compare_xcom_maps.py']
+    dir: '$REPO_NAME/etls/evaluation/game-1/game_event/workflow-dag'
+    id: 'unit-test-on-operator-code'
+
+#  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+#    entrypoint: "bash"
+#    args: ["build-utils/load_var.sh"]
+#    id: 'set-composer-variables'
+
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', 'compare_xcom_maps.py', '${_STAGING_COMPOSER_DAG_BUCKET}']
+    dir: '$REPO_NAME/etls/evaluation/game-1/game_event/workflow-dag'
+    id: 'deploy-custom-operator'
+
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', 'data-pipeline-test.py', '${_STAGING_COMPOSER_DAG_BUCKET}']
+    dir: '$REPO_NAME/etls/evaluation/game-1/game_event/workflow-dag'
+    id: 'deploy-processing-pipeline'
+#  - name: gcr.io/cloud-builders/gcloud
+#    entrypoint: 'bash'
+#    args: ['wait_for_dag_deployed.sh', '${_COMPOSER_ENV_NAME}', '${_COMPOSER_REGION}', '${_COMPOSER_DAG_NAME_TEST}', '6', '20']
+#    dir: '$REPO_NAME/build-pipeline'
+#    id: 'wait-for-dag-deployed-on-composer'
+#  - name: gcr.io/cloud-builders/gcloud
+#    args: ['composer', 'environments', 'run', '${_COMPOSER_ENV_NAME}', '--location', '${_COMPOSER_REGION}', 'trigger_dag', '--', '${_COMPOSER_DAG_NAME_TEST}', '--run_id=$BUILD_ID']
+#    id: 'trigger-pipeline-execution'
+
+#    gcloud composer environments run cherc --location us-central1 variables -- -i ${COMPOSER_DATA_FOLDER}/variables.json
+#
+#  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+#    entrypoint: "bash"
+#    args: ["build-utils/publish-artifact.sh"]
+
+
+#  gcloud builds submit --config=build_deploy_test.yaml --substitutions=\
+#  REPO_NAME=$SOURCE_CODE_REPO,\
+#  BRANCH_NAME=test,\
+#  _STAGING_COMPOSER_DAG_BUCKET=$STAGING_COMPOSER_DAG_BUCKET,
+#  _JAR_BUCKET=$JAR_BUCKET_TEST,\
+#  _COMPOSER_INPUT_BUCKET=$INPUT_BUCKET_TEST,\
+#  _COMPOSER_REF_BUCKET=$REF_BUCKET_TEST,\
+#  _COMPOSER_ENV_NAME=$COMPOSER_ENV_NAME,\
+#  _COMPOSER_REGION=$COMPOSER_REGION,\
+#  _COMPOSER_DAG_NAME_TEST=$COMPOSER_DAG_NAME_TEST
+
+#  gcloud builds submit --config=build_deploy_test.yaml --substitutions=REPO_NAME=$SOURCE_CODE_REPO,BRANCH_NAME=$TEST,_STAGING_COMPOSER_DAG_BUCKET=$STAGING_COMPOSER_DAG_BUCKET
+
+
+
+
