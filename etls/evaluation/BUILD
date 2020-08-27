@@ -54,8 +54,10 @@ genrule(
         BRANCH="$$(git rev-parse --abbrev-ref HEAD)"
         cd $${EXECPATH}
         VERSIONTXT="./version.txt"
-        echo -e $${BRANCH}}_$${COMMIT} > VERSIONTXT > $@
+        echo -e $${BRANCH}}_$${COMMIT}
         """
 )
+
+# > VERSIONTXT > $@
 
 #cd /workspace/cicd
