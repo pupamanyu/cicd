@@ -21,20 +21,20 @@ steps:
     entrypoint: "git"
     args: ["clone","--single-branch",
            "--branch","${_BRANCH_NAME}",
-           "https://github.com/pupamanyu/${_REPO_NAME}",]
+           "https://github.com/pupamanyu/${_REPO_NAME}"]
     id: 'check-out-source-code'
 
   - name: "gcr.io/cloud-builders/bazel:latest"
     args: [
-      'build', '//etls/evaluation:create-debian-package',"--verbose_failures",
+      'build', '//etls/evaluation:game-event',"--verbose_failures",
     ]
     id: 'build-debian-package'
 
-#  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
-#    entrypoint: "bash"
-#    args: ['publish-artifact.sh', '${_STAGING_COMPOSER_ENV_NAME}', '${_STAGING_COMPOSER_REGION}', '${_STAGING_COMPOSER_DAG_NAME_TEST}', '6', '20']
-#    dir: '${_REPO_NAME}/build-utils'
-#    id: 'publish-artifact'
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "bash"
+    args: ['publish-artifact.sh','${_BAZEL_WORKSPACE}','${_ARTIFACTBUCKET}','${_ARTIFACTDIR}','${_ARTIFACTREPO}','${_ARTIFACT_REPO_REGION}']
+    dir: '${_REPO_NAME}/build-utils'
+    id: 'publish-artifact'
 
 #  - name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
 #    entrypoint: 'python'
@@ -72,6 +72,15 @@ steps:
 #                          _STAGING_COMPOSER_ENV_NAME=$STAGING_COMPOSER_ENV_NAME,\
 #                          _STAGING_COMPOSER_REGION=$STAGING_COMPOSER_REGION,\
 #                          _STAGING_COMPOSER_DAG_NAME_TEST=$STAGING_COMPOSER_DAG_NAME_TEST
+
+#  gcloud builds submit --config=build_deploy_test.yaml --substitutions=_REPO_NAME=$REPO_NAME,\
+  _BRANCH_NAME=$TEST,\
+  _BAZEL_WORKSPACE=$BAZEL_WORKSPACE,\
+  _ARTIFACTBUCKET=$ARTIFACTBUCKET,\
+  _ARTIFACTDIR=$ARTIFACTDIR,\
+  _ARTIFACTREPO=$ARTIFACTREPO,\
+  __ARTIFACT_REPO_REGION=$_ARTIFACT_REPO_REGION
+
 
 
 

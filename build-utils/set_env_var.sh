@@ -21,11 +21,6 @@
 export TEST='test'
 export STAGING_GCP_PROJECT_ID=$(gcloud config list --format 'value(core.project)')
 export STAGING_PROJECT_NUMBER=$(gcloud projects describe "${STAGING_GCP_PROJECT_ID}" --format='get(projectNumber)')
-export JAR_BUCKET_TEST="${STAGING_GCP_PROJECT_ID}-composer-source-${TEST}"
-export INPUT_BUCKET_TEST="${STAGING_GCP_PROJECT_ID}-composer-input-${TEST}"
-export RESULT_BUCKET_TEST="${STAGING_GCP_PROJECT_ID}-composer-result-${TEST}"
-export REF_BUCKET_TEST="${STAGING_GCP_PROJECT_ID}-composer-ref-${TEST}"
-export STAGING_BUCKET_TEST="${STAGING_GCP_PROJECT_ID}-staging-${TEST}"
 
 # Export prod settings
 
@@ -52,3 +47,9 @@ export STAGING_COMPOSER_SERVICE_ACCOUNT=$(gcloud composer environments describe 
 export REPO_NAME='cicd'
 export COMPOSER_DAG_NAME_TEST='test_lor_game_event'
 #export COMPOSER_DAG_NAME_PROD='prod_lor_game_event'
+
+export BAZEL_WORKSPACE=/workspace/${REPO_NAME}
+export ARTIFACTBUCKET=gs://lor-data-platform-dev-gouri/staging/game-event/
+export ARTIFACTDIR=/bazel-bin/etls/evaluation
+export ARTIFACTREPO=artifact-repo
+export _ARTIFACT_REPO_REGION='us-central1'

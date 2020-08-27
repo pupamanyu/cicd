@@ -16,20 +16,15 @@
 EXECPATH=$(pwd)
 BAZEL_WORKSPACE=${1}
 cd ${BAZEL_WORKSPACE}
-# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
+
 ARTIFACTBUCKET=${2}
-# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTDIR=${3}
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 COMMIT_SHA=$(git rev-parse HEAD)
 ARTIFACT="game-event.deb"
 RENAMED="game_event_${BRANCH_NAME}_${COMMIT_SHA}.deb"
-# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
-# TODO: This will be a new repo for Maven Repo
-ARTIFACTREPO=artifact-repo
-# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
-REGION=us-central1
-#COMPOSERENV="gs://us-central1-stage-env-a3819b6c-bucket/dags"
+ARTIFACTREPO=${4}
+REGION=${5}
 
 copy_artifact_to_gcs() {
     # Needed since Artifact Registry takes input artifacts from only GCS location at the moment
