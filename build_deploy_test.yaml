@@ -26,7 +26,7 @@ steps:
 
   - name: "gcr.io/cloud-builders/bazel:latest"
     args: [
-      'build', '//etls/evaluation:game-event',"--verbose_failures",
+      'build', '//etls/evaluation:create-debian-package',"--verbose_failures",
     ]
     id: 'build-debian-package'
 

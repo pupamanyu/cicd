@@ -14,6 +14,10 @@
 # push artifact.sh
 #cd $(git rev-parse --show-toplevel)
 EXECPATH=$(pwd)
+SOURCE="${BASH_SOURCE[0]}"
+DIR="$( dirname "$SOURCE" )"
+echo "SOURCE is '$SOURCE'"
+echo "dir is '$DIR'"
 BAZEL_WORKSPACE=$(bazel info workspace)
 cd BAZEL_WORKSPACE
 #cd /workspace/cicd

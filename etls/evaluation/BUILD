@@ -43,10 +43,6 @@ genrule(
    name = "embeded_label",
    outs = ["version.txt"],
    cmd = """
-        SOURCE="$${BASH_SOURCE[0]}"
-        DIR="$$( dirname "$SOURCE" )"
-        echo $${SOURCE}
-        echo $${DIR}
         EXECPATH=$$(pwd)
         cd /workspace/cicd
         cd $$(bazel info workspace)
@@ -54,10 +50,10 @@ genrule(
         BRANCH="$$(git rev-parse --abbrev-ref HEAD)"
         cd $${EXECPATH}
         VERSIONTXT="./version.txt"
-        echo -e $${BRANCH}}_$${COMMIT}
+        echo -e $${BRANCH}}_$${COMMIT} > VERSIONTXT > $@
         """
 )
 
-# > VERSIONTXT > $@
+#
 
 #cd /workspace/cicd
