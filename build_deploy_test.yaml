@@ -20,21 +20,21 @@ steps:
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
     entrypoint: "git"
     args: ["clone","--single-branch",
-           "--branch","${BRANCH_NAME}",
-           "https://github.com/pupamanyu/${REPO_NAME}",]
+           "--branch","${_BRANCH_NAME}",
+           "https://github.com/pupamanyu/${_REPO_NAME}",]
     id: 'check-out-source-code'
 
   - name: "gcr.io/cloud-builders/bazel:latest"
     args: [
       'build', '//etls/evaluation:game-event',
     ]
-    id: 'build-jar'
+    id: 'build-debian-package'
 
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
-    entrypoint: "bash"
-    args: ['publish-artifact.sh', '${_STAGING_COMPOSER_ENV_NAME}', '${_STAGING_COMPOSER_REGION}', '${_STAGING_COMPOSER_DAG_NAME_TEST}', '6', '20']
-    dir: '$REPO_NAME/build-utils'
-    id: 'publish-artifact'
+#  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+#    entrypoint: "bash"
+#    args: ['publish-artifact.sh', '${_STAGING_COMPOSER_ENV_NAME}', '${_STAGING_COMPOSER_REGION}', '${_STAGING_COMPOSER_DAG_NAME_TEST}', '6', '20']
+#    dir: '${_REPO_NAME}/build-utils'
+#    id: 'publish-artifact'
 
 #  - name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
 #    entrypoint: 'python'
@@ -66,8 +66,8 @@ steps:
 #    args: ['composer', 'environments', 'run', '${_STAGING_COMPOSER_ENV_NAME}', '--location', '${_STAGING_COMPOSER_REGION}', 'trigger_dag', '--', '${_STAGING_COMPOSER_DAG_NAME_TEST}', '--run_id=$BUILD_ID']
 #    id: 'trigger-pipeline-execution'
 
-#  gcloud builds submit --config=build_deploy_test.yaml --substitutions=REPO_NAME=$SOURCE_CODE_REPO, \
-#                          BRANCH_NAME=$TEST,\
+#  gcloud builds submit --config=build_deploy_test.yaml --substitutions=REPO_NAME=$_REPO_NAME, \
+#                          _BRANCH_NAME=$TEST,\
 #                          _STAGING_COMPOSER_DAG_BUCKET=$STAGING_COMPOSER_DAG_BUCKET,\
 #                          _STAGING_COMPOSER_ENV_NAME=$STAGING_COMPOSER_ENV_NAME,\
 #                          _STAGING_COMPOSER_REGION=$STAGING_COMPOSER_REGION,\

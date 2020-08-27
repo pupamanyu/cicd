@@ -18,8 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export BAZEL_WORKSPACE=$(bazel info workspace)
-
 export TEST='test'
 export STAGING_GCP_PROJECT_ID=$(gcloud config list --format 'value(core.project)')
 export STAGING_PROJECT_NUMBER=$(gcloud projects describe "${STAGING_GCP_PROJECT_ID}" --format='get(projectNumber)')
@@ -51,6 +49,6 @@ export STAGING_COMPOSER_DAG_BUCKET=$(gcloud composer environments describe $STAG
 export STAGING_COMPOSER_SERVICE_ACCOUNT=$(gcloud composer environments describe $STAGING_COMPOSER_ENV_NAME \
                                   --location $COMPOSER_REGION \
                                   --format="get(config.nodeConfig.serviceAccount)")
-export SOURCE_CODE_REPO='cicd'
+export REPO_NAME='cicd'
 export COMPOSER_DAG_NAME_TEST='test_lor_game_event'
 #export COMPOSER_DAG_NAME_PROD='prod_lor_game_event'
