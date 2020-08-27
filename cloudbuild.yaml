@@ -1,4 +1,4 @@
-# Copyright 2019 Google Inc.
+# Copyright 2020 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,46 +11,41 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# TODO: to look at possibility of using global environment variables for some of the step parameters
 steps:
-  # Add some checks around examples.
-  - name: 'gcr.io/cloud-builders/git'
-    id: get commit sha
-    entrypoint: /bin/sh
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "git"
     args:
-      - '-c'
-      - |
-        echo "$(pwd)"
-        commit_sha=$(git rev-parse HEAD)
-        echo "$commit_sha"
-        file=$(git show --pretty="format:" --name-only $commit_sha)
-        echo "$file"
-        dir=$(dirname $file)
-        echo "$dir"
-
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
+      [
+        "clone",
+        "--single-branch",
+        "--branch",
+        "${BRANCH_NAME}",
+        "https://github.com/pupamanyu/${REPO_NAME}",
+      ]
+    id: "check-out-source-code"
+  - name: "gcr.io/cloud-marketplace-containers/google/bazel"
+    entrypoint: "bazel"
+    dir: "${REPO_NAME}"
     args:
-      - '-c'
-      - |
-
-        # Loop through the builders, and build independently.
-        # for d in */; do
-        for d in "$dir"/*; do
-          config="${d}cloudbuild.yaml"
-          #config="cloudbuild.yaml"
-
-          if [[ ! -f "${config}" ]]; then
-            continue
-          fi
-
-          echo "cloudbuild.yaml exists in $dir"
-
-          echo "Building $d ... "
-          (
-          gcloud builds submit $d --config=${config}
-
-          ) &
-          done
-          wait
-
-tags: ['$_SHA']
+      [
+        "--output_base=/tmp/bzl",
+        "build",
+        "//etls/evaluation:game-event-jar",
+        "--verbose_failures",
+        # Need service account to have IAM permissions for https://www.googleapis.com/auth/devstorage.read_write
+#        "--remote_http_cache=https://storbucket-nameage.googleapis.com/pramodrao-bazel-remote-cache",
+#        "--google_default_credentials",
+      ]
+    id: "build-dag-artifact"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "bash"
+    dir: "${REPO_NAME}"
+    args: ["build-utils/publish-artifact.sh"]
+    id: "publish-artifact"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "bash"
+    dir: "${REPO_NAME}"
+    args: ["build-utils/deploy-artifact.sh"]
+    id: "deploy-artifact"
