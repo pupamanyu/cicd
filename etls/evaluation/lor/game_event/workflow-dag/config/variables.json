@@ -1,44 +1,44 @@
 {
   "game_event_test": {
     "bq_conn_id": "my_gcp_conn",
-    "target_project_id": "data-platform-dev-f369",
-    "target_dataset_name": "gouri_dev",
-    "source_project_id": "data-platform-dev-f369",
-    "source_dataset_name": "insights",
+    "target_project_id": "xxxxxxxxxxxxx",
+    "target_dataset_name": "xxxxxx",
+    "source_project_id": "xxxxxx",
+    "source_dataset_name": "xxxxxx",
     "tables": [
       {
-        "name": "equipped_item_reference_daily",
-        "schema_gcs_location": "gs://data-platform-dev-f369_cicd_schema/equipped_item_reference_daily_schema.json",
+        "name": "xxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/equipped_item_reference_daily_schema.json",
         "loadscript": "/sql/equipped_item_reference_daily_inserttable.sql"
       },
       {
         "name": "player_location_daily",
-        "schema_gcs_location": "gs://data-platform-dev-f369_cicd_schema/player_location_daily_schema.json",
+        "schema_gcs_location": "gs://xxxxxxx/player_location_daily_schema.json",
         "loadscript": "/sql/player_location_daily_inserttable.sql"
       },
       {
         "name": "session_start_event",
-        "schema_gcs_location": "gs://data-platform-dev-f369_cicd_schema/session_start_event_schema.json",
+        "schema_gcs_location": "gs://xxxxxxx/session_start_event_schema.json",
         "loadscript": "/sql/session_start_event_inserttable.sql"
       },
       {
         "name": "clean_game_start",
-        "schema_gcs_location": "gs://data-platform-dev-f369_cicd_schema/clean_game_start_schema.json",
+        "schema_gcs_location": "gs://xxxxxxx/clean_game_start_schema.json",
         "loadscript": "/sql/clean_game_start_inserttable.sql"
       },
       {
         "name": "clean_game_end",
-        "schema_gcs_location": "gs://data-platform-dev-f369_cicd_schema/clean_game_end_schema.json",
+        "schema_gcs_location": "gs://xxxxxxx/clean_game_end_schema.json",
         "loadscript": "/sql/clean_game_end_inserttable.sql"
       },
       {
         "name": "clean_queue_result",
-        "schema_gcs_location": "gs://data-platform-dev-f369_cicd_schema/clean_queue_result_schema.json",
+        "schema_gcs_location": "gs://xxxxxxx/clean_queue_result_schema.json",
         "loadscript": "/sql/clean_queue_result_inserttable.sql"
       },
       {
         "name": "game_event",
-        "schema_gcs_location": "gs://data-platform-dev-f369_cicd_schema/game_event_schema.json",
+        "schema_gcs_location": "gs://xxxxxxx/game_event_schema.json",
         "loadscript": "/sql/game_event_inserttable.sql"
       }
       ]
