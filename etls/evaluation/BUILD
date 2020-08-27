@@ -44,7 +44,7 @@ genrule(
    outs = ["version.txt"],
    cmd = """
         EXECPATH=$$(pwd)
-        cd $$build_bazel_workspace
+        cd $$(build_bazel_workspace)
         COMMIT="$$(git rev-parse HEAD)"
         BRANCH="$$(git rev-parse --abbrev-ref HEAD)"
         cd $${EXECPATH}
