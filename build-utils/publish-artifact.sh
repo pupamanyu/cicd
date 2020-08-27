@@ -27,7 +27,7 @@ ARTIFACTREPO=${4}
 REGION=${5}
 
 copy_artifact_to_gcs() {
-    cd  ${EXECPATH}
+#    cd  ${EXECPATH}
     mv ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTDIR}/${RENAMED}
     gsutil -m cp ${ARTIFACTDIR}/${RENAMED} ${ARTIFACTBUCKET}
 }
