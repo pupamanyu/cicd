@@ -15,8 +15,9 @@
 
 EXECPATH=$(pwd)
 BAZEL_WORKSPACE=${1}
+echo $(pwd)
 cd ${BAZEL_WORKSPACE}
-
+echo $(pwd)
 ARTIFACTBUCKET=${2}
 ARTIFACTDIR=${3}
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
@@ -28,8 +29,12 @@ REGION=${5}
 
 copy_artifact_to_gcs() {
 #    cd  ${EXECPATH}
+    echo ${ARTIFACTDIR}
+
     mv ${ARTIFACTDIR}/${ARTIFACT} ${ARTIFACTDIR}/${RENAMED}
+    echo "renamed... "
     gsutil -m cp ${ARTIFACTDIR}/${RENAMED} ${ARTIFACTBUCKET}
+    echo "upload to gcs ... "
 }
 
 upload_deb_artifact() {
