@@ -11,8 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# push artifact.sh
-#cd $(git rev-parse --show-toplevel)
+# publish-artifact.sh
+
 EXECPATH=$(pwd)
 BAZEL_WORKSPACE=${1}
 cd ${BAZEL_WORKSPACE}
