@@ -23,7 +23,7 @@ pkg_tar(
 )
 
 pkg_deb(
-    name = "game-event",
+    name = "create-debian-package",
     architecture = "amd64",
     built_using = "unzip (6.0.1)",
     data = ":game-event-dag",
@@ -43,8 +43,12 @@ genrule(
    name = "embeded_label",
    outs = ["version.txt"],
    cmd = """
+        SOURCE="$${BASH_SOURCE[0]}"
+        DIR="$$( dirname "$SOURCE" )"
+        echo $${SOURCE}
+        echo $${DIR}
         EXECPATH=$$(pwd)
-        cd /workspace
+        cd /workspace/cicd
         cd $$(bazel info workspace)
         COMMIT="$$(git rev-parse HEAD)"
         BRANCH="$$(git rev-parse --abbrev-ref HEAD)"
