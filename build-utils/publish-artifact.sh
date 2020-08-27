@@ -14,13 +14,8 @@
 # push artifact.sh
 #cd $(git rev-parse --show-toplevel)
 EXECPATH=$(pwd)
-SOURCE="${BASH_SOURCE[0]}"
-DIR="$( dirname "$SOURCE" )"
-echo "SOURCE is '$SOURCE'"
-echo "dir is '$DIR'"
-BAZEL_WORKSPACE=$(bazel info workspace)
-cd BAZEL_WORKSPACE
-#cd /workspace/cicd
+BAZEL_WORKSPACE=${1}
+cd ${BAZEL_WORKSPACE}
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTBUCKET=gs://lor-data-platform-dev-gouri/staging/game-event/
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build

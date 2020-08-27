@@ -23,7 +23,7 @@ pkg_tar(
 )
 
 pkg_deb(
-    name = "create-debian-package",
+    name = "game-event",
     architecture = "amd64",
     built_using = "unzip (6.0.1)",
     data = ":game-event-dag",
@@ -49,7 +49,7 @@ genrule(
         BRANCH="$$(git rev-parse --abbrev-ref HEAD)"
         cd $${EXECPATH}
         VERSIONTXT="./version.txt"
-        echo -e $${BRANCH}}_$${COMMIT} > VERSIONTXT > $@
+        echo -e $${BRANCH}_$${COMMIT} > VERSIONTXT > $@
         """
 )
 
