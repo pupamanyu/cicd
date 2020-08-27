@@ -36,35 +36,35 @@ steps:
     dir: '${_REPO_NAME}/build-utils'
     id: 'publish-artifact'
 
-#  - name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
-#    entrypoint: 'python'
-#    args: ['test_compare_xcom_maps.py']
-#    dir: '$REPO_NAME/etls/evaluation/game-1/game_event/workflow-dag'
-#    id: 'unit-test-on-operator-code'
-#
-#  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
-#    entrypoint: "bash"
-#    args: ["build-utils/load_composer_var.sh"]
-#    id: 'set-composer-variables'
-#
-#  - name: "gcr.io/cloud-builders/gsutil"
-#    args: ['cp', 'compare_xcom_maps.py', '${_STAGING_COMPOSER_DAG_BUCKET}']
-#    dir: '$REPO_NAME/etls/evaluation/game-1/game_event/workflow-dag'
-#    id: 'deploy-custom-operator'
-#
-#  - name: "gcr.io/cloud-builders/gsutil"
-#    args: ['cp', 'gs://lor-data-platform-dev-gouri/staging/game-event/*', '${_STAGING_COMPOSER_DAG_BUCKET}']
-#    id: 'deploy-processing-pipeline'
-#
-#  - name: "gcr.io/cloud-builders/gcloud"
-#    entrypoint: 'bash'
-#    args: ['wait_for_dag_deployed.sh', '${_STAGING_COMPOSER_ENV_NAME}', '${_STAGING_COMPOSER_REGION}', '${_STAGING_COMPOSER_DAG_NAME_TEST}', '6', '20']
-#    dir: '$REPO_NAME/build-utils'
-#    id: 'wait-for-dag-deployed-on-composer'
-#
-#  - name: "gcr.io/cloud-builders/gcloud"
-#    args: ['composer', 'environments', 'run', '${_STAGING_COMPOSER_ENV_NAME}', '--location', '${_STAGING_COMPOSER_REGION}', 'trigger_dag', '--', '${_STAGING_COMPOSER_DAG_NAME_TEST}', '--run_id=$BUILD_ID']
-#    id: 'trigger-pipeline-execution'
+  - name: 'gcr.io/cloud-solutions-images/apache-airflow:1.10'
+    entrypoint: 'python'
+    args: ['test_compare_xcom_maps.py']
+    dir: '$REPO_NAME/etls/evaluation/game-1/game_event/workflow-dag'
+    id: 'unit-test-on-operator-code'
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+    entrypoint: "bash"
+    args: ["build-utils/load_composer_var.sh"]
+    id: 'set-composer-variables'
+
+  - name: "gcr.io/cloud-builders/gsutil"
+    args: ['cp', 'compare_xcom_maps.py', '${_STAGING_COMPOSER_DAG_BUCKET}']
+    dir: '$REPO_NAME/etls/evaluation/game-1/game_event/workflow-dag'
+    id: 'deploy-custom-operator'
+
+  - name: "gcr.io/cloud-builders/gsutil"
+    args: ['cp', 'gs://lor-data-platform-dev-gouri/staging/game-event/*', '${_STAGING_COMPOSER_DAG_BUCKET}']
+    id: 'deploy-processing-pipeline'
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: 'bash'
+    args: ['wait_for_dag_deployed.sh', '${_STAGING_COMPOSER_ENV_NAME}', '${_STAGING_COMPOSER_REGION}', '${_STAGING_COMPOSER_DAG_NAME_TEST}', '6', '20']
+    dir: '$REPO_NAME/build-utils'
+    id: 'wait-for-dag-deployed-on-composer'
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ['composer', 'environments', 'run', '${_STAGING_COMPOSER_ENV_NAME}', '--location', '${_STAGING_COMPOSER_REGION}', 'trigger_dag', '--', '${_STAGING_COMPOSER_DAG_NAME_TEST}', '--run_id=$BUILD_ID']
+    id: 'trigger-pipeline-execution'
 
 #  gcloud builds submit --config=build_deploy_test.yaml --substitutions=REPO_NAME=$_REPO_NAME, \
 #                          _BRANCH_NAME=$TEST,\
@@ -73,13 +73,7 @@ steps:
 #                          _STAGING_COMPOSER_REGION=$STAGING_COMPOSER_REGION,\
 #                          _STAGING_COMPOSER_DAG_NAME_TEST=$STAGING_COMPOSER_DAG_NAME_TEST
 
-#  gcloud builds submit --config=build_deploy_test.yaml --substitutions=_REPO_NAME=$REPO_NAME,\
-  _BRANCH_NAME=$TEST,\
-  _BAZEL_WORKSPACE=$BAZEL_WORKSPACE,\
-  _ARTIFACTBUCKET=$ARTIFACTBUCKET,\
-  _ARTIFACTDIR=$ARTIFACTDIR,\
-  _ARTIFACTREPO=$ARTIFACTREPO,\
-  __ARTIFACT_REPO_REGION=$_ARTIFACT_REPO_REGION
+#  gcloud builds submit --config=build_deploy_test.yaml --substitutions=_REPO_NAME=$REPO_NAME,_BRANCH_NAME=$TEST,_BAZEL_WORKSPACE=$BAZEL_WORKSPACE,_ARTIFACTBUCKET=$ARTIFACTBUCKET,_ARTIFACTDIR=$ARTIFACTDIR,_ARTIFACTREPO=$ARTIFACTREPO,_ARTIFACT_REPO_REGION=$_ARTIFACT_REPO_REGION
 
 
 
