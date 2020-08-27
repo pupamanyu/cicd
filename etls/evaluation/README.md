@@ -1,6 +1,14 @@
 # CI/CD for data processing workflow
 This repository contains source code for the guide on how to use Cloud Build, Bazel, Cloud Composer and Artifact Registry with Apt Repository to create a CI/CD pipeline for building, deployment and testing of a data processing workflow.
 
+# Roles for the Tools
+1. Github (as a Code Repository for Colloboration)
+2. Github Actions(for Linting/Syntax Validation/Pre-commit hooks)
+3. Cloud Build(as a CD tool)
+4. Bazel(as an Artifact producer)
+5. Artifact Registry(as an APT Repository)
+6. Cloud Composer(as an Airflow DAG Scheduler)
+
 The code is in two folders:
 
 1. monorepo-data/etls -
@@ -17,10 +25,18 @@ Please refer the below diagram for source code structure.
 #The CI/CD pipeline
 At a high level, the CI/CD pipeline consists of the following steps:
 
-1. Cloud Build packages the lor game-event dag files into a Debian Archive (DEB) file using the Bazel builder. The Bazel builder is a container with Bazel installed in it. When a build step is configured to use the Bazel builder, Bazel runs the tasks.
-1. Cloud Build uploads the DEB file to Cloud Storage and publishes to APT repository of Cloud Artifact Registry.
-1. Cloud Build runs unit tests on the data-processing workflow code and deploys the workflow code to Cloud Composer.
-Cloud Composer picks up the DEB file and runs the data-processing job on Dataflow.
+1. Developers cuts the branch, creates a feature branch, then commits the code, issues the PR
+2. Trigger Github Actions which does linting, syntax validation for SQL
+3. Successful Github Actions will merge into base branch triggering cloud build, Failed pre-commit will trigger notification
+4. Cloud Build extracts the code from the Github branch
+5. Cloud Build triggers Bazel Build using the Bazel builder container image.
+6. Bazel packages the DAG files into a Debian Archive (DEB) file, having appropriate metadata containing branch name, version etc
+7. Cloud Build uploads the DEB file to Cloud Storage Bucket(Needed due to requirement of Cloud Artifact Registry accepting only GCS source)
+8. Cloud Build publishes to APT repository of Cloud Artifact Registry.
+9. Cloud Build runs unit tests
+10. Cloud Build explodes the DEB file, and extracts the DAG
+11. Cloud Build deploys the workflow code to Cloud Composer(Airflow) DAG GCS bucket.
+12. Airflow updates the DAG, and runs the Data Processing as per the DAG configuration.
 
 The following diagram shows a detailed view of the CI/CD pipeline steps.
 ![](img/BigQuery_CICD.png)
