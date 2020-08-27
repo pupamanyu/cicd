@@ -41,7 +41,7 @@ export STAGING_BUCKET_TEST="${STAGING_GCP_PROJECT_ID}-staging-${TEST}"
 
 
 # Set stage composer variables
-export STAGING_COMPOSER_ENV_NAME='staging-data-pipeline-composer'
+export STAGING_COMPOSER_ENV_NAME='staging-data-pipeline-composer3'
 export COMPOSER_REGION='us-central1'
 export RESULT_BUCKET_REGION="${COMPOSER_REGION}"
 export COMPOSER_ZONE_ID='us-central1-a'
