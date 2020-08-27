@@ -17,6 +17,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+export BAZEL_WORKSPACE=$(bazel info workspace)
+
 export TEST='test'
 export STAGING_GCP_PROJECT_ID=$(gcloud config list --format 'value(core.project)')
 export STAGING_PROJECT_NUMBER=$(gcloud projects describe "${STAGING_GCP_PROJECT_ID}" --format='get(projectNumber)')

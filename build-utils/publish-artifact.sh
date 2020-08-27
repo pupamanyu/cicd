@@ -14,15 +14,13 @@
 # push artifact.sh
 #cd $(git rev-parse --show-toplevel)
 EXECPATH=$(pwd)
-cd /workspace/cicd
-#echo "pwd ... $(pwd)"
+BAZEL_WORKSPACE=$(bazel info workspace)
+cd BAZEL_WORKSPACE
+#cd /workspace/cicd
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTBUCKET=gs://lor-data-platform-dev-gouri/staging/game-event/
-#ARTIFACTBUCKET=gs://pramodrao-dataengg-workshop
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
 ARTIFACTDIR="bazel-bin/etls/evaluation"
-# TODO: Need to look at getting these variables passed down from global environment for Cloud Build
-# TODO: This will be a JAR FILE for Maven Repo
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 COMMIT_SHA=$(git rev-parse HEAD)
 ARTIFACT="game-event.deb"
@@ -41,8 +39,6 @@ copy_artifact_to_gcs() {
     echo "rename artifact complete... "
     gsutil -m cp ${ARTIFACTDIR}/${RENAMED} ${ARTIFACTBUCKET}
     echo "copy artifact to artifact registry... complete"
-#    gsutil -m cp ${ARTIFACTDIR}/${RENAMED} ${COMPOSERENV}
-#    echo "copy artifact to dags folder... complete"
 }
 
 upload_deb_artifact() {
