@@ -17,9 +17,9 @@ EXECPATH=$(pwd)
 BAZEL_WORKSPACE=${1}
 cd ${BAZEL_WORKSPACE}
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
-ARTIFACTBUCKET=gs://lor-data-platform-dev-gouri/staging/game-event/
+ARTIFACTBUCKET=${2}
 # TODO: Need to look at getting these variables passed down from global environment for Cloud Build
-ARTIFACTDIR="bazel-bin/etls/evaluation"
+ARTIFACTDIR=${3}
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 COMMIT_SHA=$(git rev-parse HEAD)
 ARTIFACT="game-event.deb"
