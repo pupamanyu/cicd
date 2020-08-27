@@ -45,7 +45,6 @@ genrule(
    cmd = """
         EXECPATH=$$(pwd)
         cd /workspace/cicd
-        cd $$(bazel info workspace)
         COMMIT="$$(git rev-parse HEAD)"
         BRANCH="$$(git rev-parse --abbrev-ref HEAD)"
         cd $${EXECPATH}
