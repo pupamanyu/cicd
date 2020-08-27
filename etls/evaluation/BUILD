@@ -32,9 +32,8 @@ pkg_deb(
         "unzip",
         ":bash-completion",
     ],
-    description = "test",
-    homepage = "http://bazel.build",
-    maintainer = "authors@customer.com",
+    description = "Game Event End to End ETL",
+    maintainer = "dev@riotgames.com",
     package = "game-event",
     version_file = ":version.txt",
 )
@@ -44,7 +43,7 @@ genrule(
    outs = ["version.txt"],
    cmd = """
         EXECPATH=$$(pwd)
-        cd $$(build_bazel_workspace)
+        cd /workspace/cicd
         COMMIT="$$(git rev-parse HEAD)"
         BRANCH="$$(git rev-parse --abbrev-ref HEAD)"
         cd $${EXECPATH}
