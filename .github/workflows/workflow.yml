@@ -24,9 +24,9 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip3 install sqlint
-        sqlint ./etls/evaluation/lor/game_event/load_scripts/*.sql
+        sqlint ./etls/evaluation/game-1/xxxxxxxxxx/load_scripts/*.sql
    
    # Syntax format
     - name: Syntax formatting
       run: |
-        sqlint -f ./etls/evaluation/lor/game_event/load_scripts/*.sql
+        sqlint -f ./etls/evaluation/game-1/xxxxxxxxxx/load_scripts/*.sql

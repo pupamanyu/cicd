@@ -1,5 +1,5 @@
 {
-  "game_event_test": {
+  "variables": {
     "bq_conn_id": "my_gcp_conn",
     "target_project_id": "xxxxxxxxxxxxx",
     "target_dataset_name": "xxxxxx",
@@ -7,39 +7,39 @@
     "source_dataset_name": "xxxxxx",
     "tables": [
       {
-        "name": "xxxxxxxx",
-        "schema_gcs_location": "gs://xxxxxxx/equipped_item_reference_daily_schema.json",
-        "loadscript": "/sql/equipped_item_reference_daily_inserttable.sql"
+        "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_inserttable.sql"
       },
       {
-        "name": "player_location_daily",
-        "schema_gcs_location": "gs://xxxxxxx/player_location_daily_schema.json",
-        "loadscript": "/sql/player_location_daily_inserttable.sql"
+        "name": "xxxxxxxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxxxxxxx_inserttable.sql"
       },
       {
-        "name": "session_start_event",
-        "schema_gcs_location": "gs://xxxxxxx/session_start_event_schema.json",
-        "loadscript": "/sql/session_start_event_inserttable.sql"
+        "name": "xxxxxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxxxxx_inserttable.sql"
       },
       {
-        "name": "clean_game_start",
-        "schema_gcs_location": "gs://xxxxxxx/clean_game_start_schema.json",
-        "loadscript": "/sql/clean_game_start_inserttable.sql"
+        "name": "xxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxx_inserttable.sql"
       },
       {
-        "name": "clean_game_end",
-        "schema_gcs_location": "gs://xxxxxxx/clean_game_end_schema.json",
-        "loadscript": "/sql/clean_game_end_inserttable.sql"
+        "name": "xxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxx_inserttable.sql"
       },
       {
-        "name": "clean_queue_result",
-        "schema_gcs_location": "gs://xxxxxxx/clean_queue_result_schema.json",
-        "loadscript": "/sql/clean_queue_result_inserttable.sql"
+        "name": "xxxxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxxxx_inserttable.sql"
       },
       {
-        "name": "game_event",
-        "schema_gcs_location": "gs://xxxxxxx/game_event_schema.json",
-        "loadscript": "/sql/game_event_inserttable.sql"
+        "name": "xxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxx_inserttable.sql"
       }
       ]
   }

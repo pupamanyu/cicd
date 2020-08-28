@@ -32,8 +32,8 @@ steps:
         export build_composer_zone_id="us-central1-a" &&
         export build_staging_composer_dag_bucket=$(gcloud composer environments describe build_staging_composer_env_name --location build_composer_region --format='get(config.dagGcsPrefix)') &&
         export build_staging_composer_service_account=$(gcloud composer environments describe build_staging_composer_env_name --location $build_staging_composer_region --format='get(config.nodeConfig.serviceAccount)') &&
-        export build_composer_dag_name_test="test_lor_game_event" &&
-        export build_artifactbucket="gs://lor-data-platform-dev-gouri/staging/game-event/" &&
+        export build_composer_dag_name_test="test_game-1_game_event" &&
+        export build_artifactbucket="gs://game-1/staging/game-event/" &&
         export build_artifactdir="${build_bazel_workspace}/bazel-bin/etls/evaluation" &&
         export build_artifactrepo="artifact-repo" &&
         export build_artifact_repo_region="us-central1" &&
@@ -75,7 +75,7 @@ steps:
       - |
         # Read environment variables from disk
         source /workspace/build-utils/set_vars &&
-        python $build_repo_name/etls/evaluation/lor/game_event/workflow-dag/test_compare_xcom_maps.py $build_bazel_workspace $build_artifactbucket $build_artifactdir $build_artifactrepo $build_artifact_repo_region
+        python $build_repo_name/etls/evaluation/game-1/game_event/workflow-dag/test_compare_xcom_maps.py $build_bazel_workspace $build_artifactbucket $build_artifactdir $build_artifactrepo $build_artifact_repo_region
     id: 'unit-test-on-operator-code'
 
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
@@ -95,7 +95,7 @@ steps:
       - |
         # Read environment variables from disk
         source /workspace/build-utils/set_vars &&
-        sh $build_repo_name/etls/evaluation/lor/game_event/workflow-dag/compare_xcom_maps.py &build_staging_composer_dag_bucket
+        sh $build_repo_name/etls/evaluation/game-1/game_event/workflow-dag/compare_xcom_maps.py &build_staging_composer_dag_bucket
     id: 'deploy-custom-operator'
 
   - name: "gcr.io/cloud-builders/gsutil"
@@ -105,7 +105,7 @@ steps:
       - |
         # Read environment variables from disk
         source /workspace/build-utils/set_vars &&
-        cp gs://lor-data-platform-dev-gouri/staging/game-event/* $build_staging_composer_dag_bucket
+        cp gs://game-1/staging/game-event/* $build_staging_composer_dag_bucket
     id: 'deploy-processing-pipeline'
 
   - name: "gcr.io/cloud-builders/gcloud"

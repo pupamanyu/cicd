@@ -37,7 +37,7 @@ from subdag import dag_preprocess, dag_preprocess_tables
 DEFAULT_DAG_ARGS = {'start_date': dt.datetime.now()}
 input_date = "2020-07-26"
 
-dag_config = Variable.get("lor_game_event_test", deserialize_json=True)
+dag_config = Variable.get("variables", deserialize_json=True)
 TARGET_PROJECT_ID = dag_config["target_project_id"]
 TARGET_DATASET_NAME = dag_config["target_dataset_name"]
 SOURCE_PROJECT_ID = dag_config["source_project_id"]
@@ -45,48 +45,48 @@ SOURCE_DATASET_NAME = dag_config["source_dataset_name"]
 TABLES = dag_config["tables"]
 
 NO_DEPENDENCY_TABLES = []
-TABLE_PLAYER_LOCATION_DAILY = []
+TABLE_xxxxxxxxxxxxxxxxxxxxx = []
 TABLE_SESSION_EVENT_START = []
-TABLE_GAME_EVENT = []
+TABLE_xxxxxxxxxx = []
 
 for table in TABLES:
     no_dependency={}
-    if table['name'] == "equipped_item_reference_daily" or \
-            table['name'] == "clean_game_start" or \
-            table['name'] == "clean_game_end" or \
-            table['name'] == "clean_queue_result":
+    if table['name'] == "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" or \
+            table['name'] == "xxxxxxxxxxxxxxxx" or \
+            table['name'] == "xxxxxxxxxxxxxx" or \
+            table['name'] == "xxxxxxxxxxxxxxxxxx":
         no_dependency['name']=table['name']
         no_dependency['schema_gcs_location']=table['schema_gcs_location']
         no_dependency['loadscript']=table['loadscript']
         NO_DEPENDENCY_TABLES.append(no_dependency)
 
-    player_location_daily={}
-    if table['name'] == "player_location_daily":
-        player_location_daily['name']=table['name']
-        player_location_daily['schema_gcs_location']=table['schema_gcs_location']
-        player_location_daily['loadscript']=table['loadscript']
-        TABLE_PLAYER_LOCATION_DAILY.append(player_location_daily)
+    xxxxxxxxxxxxxxxxxxxxx={}
+    if table['name'] == "xxxxxxxxxxxxxxxxxxxxx":
+        xxxxxxxxxxxxxxxxxxxxx['name']=table['name']
+        xxxxxxxxxxxxxxxxxxxxx['schema_gcs_location']=table['schema_gcs_location']
+        xxxxxxxxxxxxxxxxxxxxx['loadscript']=table['loadscript']
+        TABLE_xxxxxxxxxxxxxxxxxxxxx.append(xxxxxxxxxxxxxxxxxxxxx)
 
-    session_start_event={}
-    if table['name'] == "session_start_event":
-        session_start_event['name']=table['name']
-        session_start_event['schema_gcs_location']=table['schema_gcs_location']
-        session_start_event['loadscript']=table['loadscript']
-        TABLE_SESSION_EVENT_START.append(session_start_event)
+    xxxxxxxxxxxxxxxxxxx={}
+    if table['name'] == "xxxxxxxxxxxxxxxxxxx":
+        xxxxxxxxxxxxxxxxxxx['name']=table['name']
+        xxxxxxxxxxxxxxxxxxx['schema_gcs_location']=table['schema_gcs_location']
+        xxxxxxxxxxxxxxxxxxx['loadscript']=table['loadscript']
+        TABLE_SESSION_EVENT_START.append(xxxxxxxxxxxxxxxxxxx)
 
-    game_event={}
-    if table['name'] == "game_event":
-        game_event['name']=table['name']
-        game_event['schema_gcs_location']=table['schema_gcs_location']
-        game_event['loadscript']=table['loadscript']
-        TABLE_GAME_EVENT.append(game_event)
+    xxxxxxxxxx={}
+    if table['name'] == "xxxxxxxxxx":
+        xxxxxxxxxx['name']=table['name']
+        xxxxxxxxxx['schema_gcs_location']=table['schema_gcs_location']
+        xxxxxxxxxx['loadscript']=table['loadscript']
+        TABLE_xxxxxxxxxx.append(xxxxxxxxxx)
 
-DAG_ID = 'lor-game-event'
+DAG_ID = 'game-event'
 
 with models.DAG(DAG_ID,
                 schedule_interval=None,  # Override to match your needs
                 start_date=days_ago(1),
-                tags=["lor"],
+                tags=["game-1"],
                 default_args=DEFAULT_DAG_ARGS,
                 params={'source_project_id': SOURCE_PROJECT_ID,
                         'source_dataset_name': SOURCE_DATASET_NAME,
@@ -94,7 +94,7 @@ with models.DAG(DAG_ID,
                         'target_dataset_name': TARGET_DATASET_NAME,
                         'input_date':input_date}) as dag:
 
-    start_game_event_task = DummyOperator(task_id='start_game_event_task',
+    start_xxxxxxxxxx_task = DummyOperator(task_id='start_xxxxxxxxxx_task',
                                           dag=dag)
 
     # Dag Task to check the BigQuery connection
@@ -133,9 +133,9 @@ with models.DAG(DAG_ID,
 
                                                 dag=dag)
 
-    load_session_start_event = SubDagOperator(  executor=CeleryExecutor(),
-                                                task_id='load_session_start_event',
-                                                subdag=dag_preprocess('%s.%s' % (DAG_ID, 'load_session_start_event'),
+    load_xxxxxxxxxxxxxxxxxxx = SubDagOperator(  executor=CeleryExecutor(),
+                                                task_id='load_xxxxxxxxxxxxxxxxxxx',
+                                                subdag=dag_preprocess('%s.%s' % (DAG_ID, 'load_xxxxxxxxxxxxxxxxxxx'),
                                                                       dag.schedule_interval,
                                                                       DEFAULT_DAG_ARGS['start_date'],
                                                                       SOURCE_PROJECT_ID,
@@ -146,38 +146,38 @@ with models.DAG(DAG_ID,
                                                                       input_date),
                                                 dag=dag)
 
-    load_player_location_daily = SubDagOperator(executor=CeleryExecutor(),
-                                                task_id='load_player_location_daily',
-                                                subdag=dag_preprocess('%s.%s' % (DAG_ID, 'load_player_location_daily'),
+    load_xxxxxxxxxxxxxxxxxxxxx = SubDagOperator(executor=CeleryExecutor(),
+                                                task_id='load_xxxxxxxxxxxxxxxxxxxxx',
+                                                subdag=dag_preprocess('%s.%s' % (DAG_ID, 'load_xxxxxxxxxxxxxxxxxxxxx'),
                                                                       dag.schedule_interval,
                                                                       DEFAULT_DAG_ARGS['start_date'],
                                                                       SOURCE_PROJECT_ID,
                                                                       SOURCE_DATASET_NAME,
                                                                       TARGET_PROJECT_ID,
                                                                       TARGET_DATASET_NAME,
-                                                                      TABLE_PLAYER_LOCATION_DAILY,
+                                                                      TABLE_xxxxxxxxxxxxxxxxxxxxx,
                                                                       input_date),
                                                 dag=dag)
 
 
-    load_game_event = SubDagOperator(executor=CeleryExecutor(),
-                                     task_id='load_game_event',
-                                     subdag=dag_preprocess('%s.%s' % (DAG_ID, 'load_game_event'),
+    load_xxxxxxxxxx = SubDagOperator(executor=CeleryExecutor(),
+                                     task_id='load_xxxxxxxxxx',
+                                     subdag=dag_preprocess('%s.%s' % (DAG_ID, 'load_xxxxxxxxxx'),
                                                            dag.schedule_interval,
                                                            DEFAULT_DAG_ARGS['start_date'],
                                                            SOURCE_PROJECT_ID,
                                                            SOURCE_DATASET_NAME,
                                                            TARGET_PROJECT_ID,
                                                            TARGET_DATASET_NAME,
-                                                           TABLE_GAME_EVENT,
+                                                           TABLE_xxxxxxxxxx,
                                                            input_date),
                                      dag=dag)
 
-    end_game_event_task = DummyOperator(task_id='end_game_event_task',trigger_rule='none_failed_or_skipped',
+    end_xxxxxxxxxx_task = DummyOperator(task_id='end_xxxxxxxxxx_task',trigger_rule='none_failed_or_skipped',
                                         dag=dag)
 
-    start_game_event_task >> check_bigquery_connection >> preprocess_check_create_tables_if_not_exists >> [load_no_dependency_tables,
-                                                                                                           load_session_start_event]
-    load_no_dependency_tables >> load_game_event >> end_game_event_task
+    start_xxxxxxxxxx_task >> check_bigquery_connection >> preprocess_check_create_tables_if_not_exists >> [load_no_dependency_tables,
+                                                                                                           load_xxxxxxxxxxxxxxxxxxx]
+    load_no_dependency_tables >> load_xxxxxxxxxx >> end_xxxxxxxxxx_task
 
-    load_session_start_event >> load_player_location_daily >> load_game_event >> end_game_event_task
+    load_xxxxxxxxxxxxxxxxxxx >> load_xxxxxxxxxxxxxxxxxxxxx >> load_xxxxxxxxxx >> end_xxxxxxxxxx_task

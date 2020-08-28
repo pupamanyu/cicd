@@ -11,7 +11,7 @@ cd /workspace/cicd
 COMPOSER_DATA_FOLDER="/home/airflow/gcs/data"
 COMPOSER_NAME="staging-data-pipeline-composer"
 COMPOSER_LOCATION="us-central1"
-ENV_VARIABLES_JSON_FILE="etls/evaluation/game-1/game_event/workflow-dag/config/variables.json"
+ENV_VARIABLES_JSON_FILE="etls/evaluation/game-1/xxxxxxxxxx/workflow-dag/config/variables.json"
 echo $COMPOSER_DATA_FOLDER
 echo $COMPOSER_NAME
 COMPOSER_GCS_BUCKET=$(gcloud composer environments describe ${COMPOSER_NAME} --location ${COMPOSER_LOCATION} | grep 'dagGcsPrefix' | grep -Eo "\S+/")
