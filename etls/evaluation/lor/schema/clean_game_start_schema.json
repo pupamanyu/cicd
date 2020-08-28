@@ -4,7 +4,7 @@
       "puuid"
     ]
   },
-  "id": "lor-data-platform-dev-f369:gouri_dev.clean_game_start",
+  "id": "xxxxxxxxxxxxx:xxxxxx.xxxxxxxxxxxxxxxx",
   "kind": "bigquery#table",
   "labels": {
     "org_unit": "development"
@@ -99,9 +99,9 @@
     ]
   },
   "tableReference": {
-    "datasetId": "gouri_dev",
-    "projectId": "lor-data-platform-dev-f369",
-    "tableId": "clean_game_start"
+    "datasetId": "xxxxxx",
+    "projectId": "xxxxxxxxxxxxx",
+    "tableId": "xxxxxxxxxxxxxxxx"
   },
   "timePartitioning": {
     "field": "partition_date",

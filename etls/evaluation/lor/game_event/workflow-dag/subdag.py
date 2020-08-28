@@ -27,7 +27,7 @@ from google.cloud import storage, bigquery
 def if_tbl_exists(dataset,project,table_name):
     from google.cloud.exceptions import NotFound
     client = bigquery.Client()
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/ext.gampapathini/Airflow/dags/cicd/lor-data-platform-dev-f369-0c3a4fcdd405.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/ext.gampapathini/Airflow/dags/cicd/xxxxxxxxxxxxx-0c3a4fcdd405.json'
 
     try:
         client.get_table(project+'.'+dataset+'.'+table_name)

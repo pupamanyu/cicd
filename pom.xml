@@ -23,7 +23,7 @@
 <!--                        <goal>jar</goal>-->
 <!--                    </goals>-->
 <!--                    <configuration>-->
-<!--                        <classesDirectory>/Users/ext.gampapathini/Documents/cicd/etls/evaluation/game-1/game_event</classesDirectory>-->
+<!--                        <classesDirectory>/Users/ext.gampapathini/Documents/cicd/etls/evaluation/game-1/xxxxxxxxxx</classesDirectory>-->
 <!--                    </configuration>-->
 <!--                </execution>-->
 <!--            </executions>-->

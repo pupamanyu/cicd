@@ -4,24 +4,24 @@ Copyright 2020 Google LLC.
 This software is provided as-is, without warranty or representation
 for any use or purpose. Your use of it is subject to your agreement with Google.
 
-SQL Script(This one): clean_game_end_inserttable
-Purpose: clean_game_end ETL Beam Pipeline
+SQL Script(This one): xxxxxxxxxxxxxx_inserttable
+Purpose: xxxxxxxxxxxxxx ETL Beam Pipeline
 
 Input: Date
 Expected Output: Delete existing date partitioned data.
-               Populate clean_game_end data for date partition.
+               Populate xxxxxxxxxxxxxx data for date partition.
 */
 
 #  Remove existing date partitioned data before insert.
 DELETE
-    `lor-data-platform-dev-f369.gouri_dev.clean_game_end`
+    `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxxxxxx`
 WHERE
         PARTITION_DATE = @dt_value;
 CREATE TEMP FUNCTION
   previous_partition_date(dt STRING) AS ( DATE_SUB(PARSE_DATE('%Y-%m-%d',
         dt), INTERVAL 1 DAY) );
 INSERT
-    `lor-data-platform-dev-f369.gouri_dev.clean_game_end` (game_id,
+    `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxxxxxx` (game_id,
                                                            realm_id,
                                                            puuid,
                                                            is_ai_filled,
@@ -58,7 +58,7 @@ WITH
             game_info.player_info.puuid AS puuid,
             MAX(end_time) AS max_time
         FROM
-            `lor-data-platform-dev-f369.lor_insights.game_end`
+            `xxxxxxxxxxxxx.xxxxxxxxxxxx.game_end`
         WHERE
                 DATE(_PARTITIONTIME) = previous_partition_date(@dt_value)
         GROUP BY
@@ -66,26 +66,26 @@ WITH
     previous_ranks AS (
         SELECT
             opponent_game_info.player_info.puuid,
-            COALESCE(gouri_dev.format_rank_division(self_rank_update.old_tier.name,
+            COALESCE(xxxxxx.format_rank_division(self_rank_update.old_tier.name,
                                                     self_rank_update.old_division),
                      "Unknown") AS old_rank,
-            COALESCE(gouri_dev.format_rank_division(self_rank_update.new_tier.name,
+            COALESCE(xxxxxx.format_rank_division(self_rank_update.new_tier.name,
                                                     self_rank_update.new_division),
                      "Unknown") AS rank,
     CAST( COALESCE ( self_rank_update.old_league_point,
     -1 ) AS INT64 ) AS old_lp,
     CAST( COALESCE ( self_rank_update.new_league_point,
     -1 ) AS INT64 ) AS lp,
-    gouri_dev.title( COALESCE ( SPLIT( opponent_rank_update.old_tier.name, "_")[ SAFE_OFFSET (1)],
+    xxxxxx.title( COALESCE ( SPLIT( opponent_rank_update.old_tier.name, "_")[ SAFE_OFFSET (1)],
     "Unknown" ) ) AS old_opponent_rank,
-    gouri_dev.title( COALESCE ( SPLIT( opponent_rank_update.new_tier.name, "_")[ SAFE_OFFSET (1)],
+    xxxxxx.title( COALESCE ( SPLIT( opponent_rank_update.new_tier.name, "_")[ SAFE_OFFSET (1)],
     "Unknown" ) ) AS opponent_rank,
     CAST( COALESCE ( opponent_rank_update.old_league_point,
     -1 ) AS INT64 ) AS old_opponent_lp,
     CAST( COALESCE ( opponent_rank_update.new_league_point,
     -1 ) AS INT64 ) AS opponent_lp
 FROM
-    `lor-data-platform-dev-f369.lor_insights.game_end` AS ge
+    `xxxxxxxxxxxxx.xxxxxxxxxxxx.game_end` AS ge
     INNER JOIN
     max_times AS mt
 ON
@@ -109,9 +109,9 @@ SELECT
     END
     queue_name,
     deck_info.deck_id AS deck_id,
-    gouri_dev.format_faction(deck_info.factions[ SAFE_OFFSET (0)]) AS faction1,
-    gouri_dev.format_faction(deck_info.factions[ SAFE_OFFSET (1)]) AS faction2,
-    gouri_dev.format_faction(deck_info.factions[ SAFE_OFFSET (2)]) AS faction3,
+    xxxxxx.format_faction(deck_info.factions[ SAFE_OFFSET (0)]) AS faction1,
+    xxxxxx.format_faction(deck_info.factions[ SAFE_OFFSET (1)]) AS faction2,
+    xxxxxx.format_faction(deck_info.factions[ SAFE_OFFSET (2)]) AS faction3,
     CAST( self_rating_update.old_match_making_rating AS INT64) AS old_mmr,
     CAST( COALESCE ( self_rating_update.new_match_making_rating,
     match_making_rating ) AS INT64) AS mmr,
@@ -121,13 +121,13 @@ SELECT
     CAST( COALESCE ( opponent_rating_update.new_match_making_rating,
     match_making_rating ) AS INT64) AS opponent_mmr,
     CASE
-    WHEN game_info.queue_name = 'TryHard' THEN COALESCE ( gouri_dev.format_rank_division( self_rank_update.old_tier.name, self_rank_update.old_division ), pr.old_rank, "Unknown" )
+    WHEN game_info.queue_name = 'TryHard' THEN COALESCE ( xxxxxx.format_rank_division( self_rank_update.old_tier.name, self_rank_update.old_division ), pr.old_rank, "Unknown" )
     ELSE
     "Not Applicable"
     END
     AS game_start_rank,
     CASE
-    WHEN game_info.queue_name = 'TryHard' THEN COALESCE ( gouri_dev.format_rank_division( self_rank_update.old_tier.name, self_rank_update.new_division ), pr.rank, "Unknown" )
+    WHEN game_info.queue_name = 'TryHard' THEN COALESCE ( xxxxxx.format_rank_division( self_rank_update.old_tier.name, self_rank_update.new_division ), pr.rank, "Unknown" )
     ELSE
     "Not Applicable"
     END
@@ -138,7 +138,7 @@ SELECT
     CAST( COALESCE ( self_rank_update.new_league_point,
     pr.lp,
     -1 ) AS INT64 ) AS game_end_lp,
-    gouri_dev.to_isoformat(end_time) AS game_end_time_utc,
+    xxxxxx.to_isoformat(end_time) AS game_end_time_utc,
     game_total_time_in_seconds AS duration,
     turn_count_game_total AS total_turn_count,
     round_count AS round_count,
@@ -149,14 +149,14 @@ SELECT
     'Tie'
     END
     AS game_outcome,
-    gouri_dev.title( REGEXP_REPLACE( game_outcome_reason, '-', ' ')) AS game_outcome_reason,
+    xxxxxx.title( REGEXP_REPLACE( game_outcome_reason, '-', ' ')) AS game_outcome_reason,
     order_of_play AS order_of_play,
-    gouri_dev.case_platform( game_info.player_info.runtime_platform ) AS runtime_platform,
+    xxxxxx.case_platform( game_info.player_info.runtime_platform ) AS runtime_platform,
     metadata.scope.deployment AS deployment,
     metadata.scope.datacenter AS datacenter,
     DATE(_PARTITIONTIME) AS partition_date
 FROM
-    `lor-data-platform-dev-f369.lor_insights.game_end`
+    `xxxxxxxxxxxxx.xxxxxxxxxxxx.game_end`
     LEFT JOIN
     previous_ranks AS pr
 ON

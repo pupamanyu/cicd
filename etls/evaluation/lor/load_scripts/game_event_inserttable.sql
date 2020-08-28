@@ -4,8 +4,8 @@ Copyright 2020 Google LLC.
 This software is provided as-is, without warranty or representation
 for any use or purpose. Your use of it is subject to your agreement with Google.
 
-SQL Script(This one): game_event_inserttable
-Purpose: game_event ETL Beam Pipeline
+SQL Script(This one): xxxxxxxxxx_inserttable
+Purpose: xxxxxxxxxx ETL Beam Pipeline
 
 Input: Date
 Expected Output: Delete existing date partitioned data.
@@ -15,7 +15,7 @@ Expected Output: Delete existing date partitioned data.
 
 #  Remove existing date partitioned data before insert.
 DELETE
-    `lor-data-platform-dev-f369.gouri_dev.game_event`
+    `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxx`
 WHERE PARTITION_DATE = @dt_value;
 
 CREATE TEMP FUNCTION get_delta(start_time STRING, end_time STRING) AS (
@@ -26,7 +26,7 @@ CREATE TEMP FUNCTION get_start_time(end_time STRING, duration INT64) AS (
     CAST(TIMESTAMP_SUB(TIMESTAMP(end_time), INTERVAL duration SECOND) AS STRING)
     );
 
-INSERT `lor-data-platform-dev-f369.gouri_dev.game_event` (game, realm_id, game_mode, game_type, game_id, puuid, player_journey_code, game_start_mmr,
+INSERT `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxx` (game, realm_id, game_mode, game_type, game_id, puuid, player_journey_code, game_start_mmr,
                              game_end_mmr, game_start_opponent_mmr, game_end_opponent_mmr, game_end_rank,
                              game_start_rank, game_end_lp, game_start_lp, opponent_puuid, is_ai, is_ai_filled, deck_id,
                              faction1, faction2, faction3, equipped_board_id, equipped_board_name, equipped_guardian_id,
@@ -38,10 +38,10 @@ INSERT `lor-data-platform-dev-f369.gouri_dev.game_event` (game, realm_id, game_m
 
 
 WITH game_start AS (
-    SELECT `lor-data-platform-dev-f369.gouri_dev.clean_game_start`.*
+    SELECT `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxxxxxxxx`.*
          , ROW_NUMBER() OVER (PARTITION BY game_id, puuid
         ORDER BY game_start_time_utc ASC)     AS phase
-    FROM `lor-data-platform-dev-f369.gouri_dev.clean_game_start`
+    FROM `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxxxxxxxx`
 )
    ,game_mode_type_map AS
     (SELECT 'AI' as raw_game_type, 'AI' as clean_game_type,'Constructed' as game_mode UNION ALL
@@ -61,9 +61,9 @@ WITH game_start AS (
      SELECT 'Ranked',  'Ranked',   'Constructed')
 
    ,game_end AS (
-    SELECT clean_game_end.*
-         , get_start_time(clean_game_end.game_end_time_utc,
-                          clean_game_end.duration)                    AS game_start_time_utc
+    SELECT xxxxxxxxxxxxxx.*
+         , get_start_time(xxxxxxxxxxxxxx.game_end_time_utc,
+                          xxxxxxxxxxxxxx.duration)                    AS game_start_time_utc
          , CASE
 
                WHEN regexp_contains(opponent_player_name,'npe_tutorials_Tutorial')
@@ -78,9 +78,9 @@ WITH game_start AS (
          , COALESCE(game_mode_type_map.clean_game_type, 'AI')          AS game_type
          , ROW_NUMBER() OVER (PARTITION BY game_id, puuid
         ORDER BY game_end_time_utc DESC)         AS phase
-    FROM `lor-data-platform-dev-f369.gouri_dev.clean_game_end` clean_game_end
+    FROM `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxxxxxx` xxxxxxxxxxxxxx
              LEFT JOIN game_mode_type_map ON
-            clean_game_end.queue_name = game_mode_type_map.raw_game_type
+            xxxxxxxxxxxxxx.queue_name = game_mode_type_map.raw_game_type
 )
 SELECT 'Bacon' as game
      , IFNULL(COALESCE(game_end.realm_id, game_start.realm_id, queue_result.realm_id),'Unknown')       AS realm_id
@@ -153,7 +153,7 @@ SELECT 'Bacon' as game
      , COALESCE(game_end.runtime_platform, game_start.runtime_platform,
                 queue_result.runtime_platform)                                       AS platform
      , 'Unknown'                                                                     AS country
-     , IFNULL(player_location_daily.country_code,'Unknown') AS country_code
+     , IFNULL(xxxxxxxxxxxxxxxxxxxxx.country_code,'Unknown') AS country_code
      , 'Not Applicable'                                                              AS partition_hour
      , CAST(game_end.partition_date AS STRING) AS partition_date
 FROM game_end
@@ -161,20 +161,20 @@ FROM game_end
             game_end.game_id = game_start.game_id
         AND game_end.puuid = game_start.puuid
 
-         LEFT JOIN gouri_dev.clean_queue_result AS queue_result ON
+         LEFT JOIN xxxxxx.xxxxxxxxxxxxxxxxxx AS queue_result ON
             game_end.game_id = queue_result.game_id
         AND game_end.puuid = queue_result.puuid
 
     -- Bacon DW Player Location Daily
-         LEFT JOIN gouri_dev.player_location_daily ON
-        game_end.puuid = player_location_daily.puuid
+         LEFT JOIN xxxxxx.xxxxxxxxxxxxxxxxxxxxx ON
+        game_end.puuid = xxxxxxxxxxxxxxxxxxxxx.puuid
 
     -- Equipped Item Reference
-         LEFT JOIN gouri_dev.equipped_item_reference_daily AS boards ON
+         LEFT JOIN xxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxx AS boards ON
         game_start.equipped_board_id = boards.equipped_item_id
-         LEFT JOIN gouri_dev.equipped_item_reference_daily AS guardians ON
+         LEFT JOIN xxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxx AS guardians ON
         game_start.equipped_guardian_id = guardians.equipped_item_id
-         LEFT JOIN gouri_dev.equipped_item_reference_daily AS card_backs ON
+         LEFT JOIN xxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxx AS card_backs ON
         game_start.equipped_card_back_id = card_backs.equipped_item_id
 
 WHERE game_start.phase = 1

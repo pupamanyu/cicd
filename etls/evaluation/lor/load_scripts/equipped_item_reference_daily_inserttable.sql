@@ -4,7 +4,7 @@ Copyright 2020 Google LLC.
 This software is provided as-is, without warranty or representation
 for any use or purpose. Your use of it is subject to your agreement with Google.
 
-SQL Script(This one): equipped_item_reference_daily_inserttable
+SQL Script(This one): xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_inserttable
 Purpose: equipped_item_reference ETL Beam Pipeline
 
 Input: Date
@@ -59,7 +59,7 @@ CREATE TEMP FUNCTION title(str STRING) RETURNS STRING AS (
         DATE('{{ params.dt_value }}') AS partition_date,
         start_time AS start_time
       FROM
-        `lor-data-platform-dev-f369.lor_insights.game_start`
+        `xxxxxxxxxxxxx.xxxxxxxxxxxx.game_start`
       WHERE
         _PARTITIONTIME = '{{ params.dt_value }}'
       UNION ALL
@@ -70,7 +70,7 @@ CREATE TEMP FUNCTION title(str STRING) RETURNS STRING AS (
         DATE('{{ params.dt_value }}') AS partition_date,
         start_time AS start_time
       FROM
-          `lor-data-platform-dev-f369.lor_insights.game_start`
+          `xxxxxxxxxxxxx.xxxxxxxxxxxx.game_start`
       WHERE
         _PARTITIONTIME = '{{ params.dt_value }}'),
       equipment_map AS (
@@ -89,7 +89,7 @@ CREATE TEMP FUNCTION title(str STRING) RETURNS STRING AS (
         DATE('{{ params.dt_value }}') AS partition_date,
         '1900-01-01' AS start_time
       FROM
-        `lor-data-platform-dev-f369.gouri_dev.equipped_item_reference_daily`
+        `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
       WHERE
         partition_date = previous_partition_date('{{ params.dt_value }}') ),
       combined AS (
@@ -102,7 +102,7 @@ CREATE TEMP FUNCTION title(str STRING) RETURNS STRING AS (
         *
       FROM
         prev_map),
-      equipped_item_reference_daily AS (
+      xxxxxxxxxxxxxxxxxxxxxxxxxxxxx AS (
       SELECT
         first_row.equipped_item_name AS equipped_item_name,
         first_row.equipped_item_type AS equipped_item_type,
@@ -127,4 +127,4 @@ CREATE TEMP FUNCTION title(str STRING) RETURNS STRING AS (
     SELECT
       *
     FROM
-      equipped_item_reference_daily
+      xxxxxxxxxxxxxxxxxxxxxxxxxxxxx

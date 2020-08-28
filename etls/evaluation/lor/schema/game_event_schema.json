@@ -5,7 +5,7 @@
       "puuid"
     ]
   },
-  "id": "lor-data-platform-dev-f369:gouri_dev.game_event",
+  "id": "xxxxxxxxxxxxx:xxxxxx.xxxxxxxxxx",
   "kind": "bigquery#table",
   "labels": {
     "org_unit": "development"
@@ -200,9 +200,9 @@
     ]
   },
   "tableReference": {
-    "datasetId": "gouri_dev",
-    "projectId": "lor-data-platform-dev-f369",
-    "tableId": "game_event"
+    "datasetId": "xxxxxx",
+    "projectId": "xxxxxxxxxxxxx",
+    "tableId": "xxxxxxxxxx"
   },
   "timePartitioning": {
     "type": "DAY"
