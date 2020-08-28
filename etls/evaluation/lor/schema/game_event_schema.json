@@ -1,0 +1,211 @@
+{
+  "clustering": {
+    "fields": [
+      "partition_date",
+      "puuid"
+    ]
+  },
+  "id": "lor-data-platform-dev-f369:gouri_dev.game_event",
+  "kind": "bigquery#table",
+  "labels": {
+    "org_unit": "development"
+  },
+  "location": "US",
+  "schema": {
+    "fields": [
+      {
+        "name": "game",
+        "type": "STRING"
+      },
+      {
+        "name": "realm_id",
+        "type": "STRING"
+      },
+      {
+        "name": "game_mode",
+        "type": "STRING"
+      },
+      {
+        "name": "game_type",
+        "type": "STRING"
+      },
+      {
+        "name": "game_id",
+        "type": "STRING"
+      },
+      {
+        "name": "puuid",
+        "type": "STRING"
+      },
+      {
+        "name": "player_journey_code",
+        "type": "STRING"
+      },
+      {
+        "name": "game_start_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_end_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_start_opponent_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_end_opponent_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "opponent_puuid",
+        "type": "STRING"
+      },
+      {
+        "name": "is_ai",
+        "type": "BOOLEAN"
+      },
+      {
+        "name": "is_ai_filled",
+        "type": "BOOLEAN"
+      },
+      {
+        "name": "deck_id",
+        "type": "STRING"
+      },
+      {
+        "name": "faction1",
+        "type": "STRING"
+      },
+      {
+        "name": "faction2",
+        "type": "STRING"
+      },
+      {
+        "name": "faction3",
+        "type": "STRING"
+      },
+      {
+        "name": "game_start_time_utc",
+        "type": "STRING"
+      },
+      {
+        "name": "game_end_time_utc",
+        "type": "STRING"
+      },
+      {
+        "name": "player_end_time_utc",
+        "type": "STRING"
+      },
+      {
+        "name": "start_time_delta",
+        "type": "INTEGER"
+      },
+      {
+        "name": "play_time_seconds",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_time_seconds",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_outcome",
+        "type": "STRING"
+      },
+      {
+        "name": "game_outcome_reason",
+        "type": "STRING"
+      },
+      {
+        "name": "total_turn_count",
+        "type": "INTEGER"
+      },
+      {
+        "name": "round_count",
+        "type": "INTEGER"
+      },
+      {
+        "name": "order_of_play",
+        "type": "INTEGER"
+      },
+      {
+        "name": "country",
+        "type": "STRING"
+      },
+      {
+        "name": "platform",
+        "type": "STRING"
+      },
+      {
+        "name": "datacenter",
+        "type": "STRING"
+      },
+      {
+        "name": "deployment",
+        "type": "STRING"
+      },
+      {
+        "name": "partition_hour",
+        "type": "STRING"
+      },
+      {
+        "name": "country_code",
+        "type": "STRING"
+      },
+      {
+        "name": "game_start_rank",
+        "type": "STRING"
+      },
+      {
+        "name": "game_end_rank",
+        "type": "STRING"
+      },
+      {
+        "name": "game_end_lp",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_start_lp",
+        "type": "INTEGER"
+      },
+      {
+        "name": "equipped_board_id",
+        "type": "STRING"
+      },
+      {
+        "name": "equipped_board_name",
+        "type": "STRING"
+      },
+      {
+        "name": "equipped_guardian_id",
+        "type": "STRING"
+      },
+      {
+        "name": "equipped_guardian_name",
+        "type": "STRING"
+      },
+      {
+        "name": "equipped_card_back_id",
+        "type": "STRING"
+      },
+      {
+        "name": "equipped_card_back_name",
+        "type": "STRING"
+      },
+      {
+        "name": "partition_date",
+        "type": "STRING"
+      }
+    ]
+  },
+  "tableReference": {
+    "datasetId": "gouri_dev",
+    "projectId": "lor-data-platform-dev-f369",
+    "tableId": "game_event"
+  },
+  "timePartitioning": {
+    "type": "DAY"
+  },
+  "type": "TABLE"
+}

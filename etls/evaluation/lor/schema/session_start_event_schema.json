@@ -1,0 +1,59 @@
+{
+  "clustering": {
+    "fields": [
+      "puuid"
+    ]
+  },
+  "id": "lor-data-platform-dev-f369:gouri_dev.session_start_event",
+  "kind": "bigquery#table",
+  "labels": {
+    "org_unit": "development"
+  },
+  "location": "US",
+  "schema": {
+    "fields": [
+      {
+        "name": "event_time_utc",
+        "type": "STRING"
+      },
+      {
+        "name": "puuid",
+        "type": "STRING"
+      },
+      {
+        "name": "ip_address",
+        "type": "STRING"
+      },
+      {
+        "name": "session_id",
+        "type": "STRING"
+      },
+      {
+        "name": "runtime_platform",
+        "type": "STRING"
+      },
+      {
+        "name": "realm_id",
+        "type": "STRING"
+      },
+      {
+        "name": "partition_date",
+        "type": "DATE"
+      },
+      {
+        "name": "country_code",
+        "type": "STRING"
+      }
+    ]
+  },
+  "tableReference": {
+    "datasetId": "gouri_dev",
+    "projectId": "lor-data-platform-dev-f369",
+    "tableId": "session_start_event"
+  },
+  "timePartitioning": {
+    "field": "partition_date",
+    "type": "DAY"
+  },
+  "type": "TABLE"
+}
