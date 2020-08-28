@@ -1,0 +1,35 @@
+{
+  "id": "lor-data-platform-dev-f369:gouri_dev.equipped_item_reference_daily",
+  "kind": "bigquery#table",
+  "location": "US",
+  "schema": {
+    "fields": [
+      {
+        "name": "equipped_item_type",
+        "type": "STRING"
+      },
+      {
+        "name": "equipped_item_id",
+        "type": "STRING"
+      },
+      {
+        "name": "equipped_item_name",
+        "type": "STRING"
+      },
+      {
+        "name": "partition_date",
+        "type": "DATE"
+      }
+    ]
+  },
+  "tableReference": {
+    "datasetId": "gouri_dev",
+    "projectId": "lor-data-platform-dev-f369",
+    "tableId": "equipped_item_reference_daily"
+  },
+  "timePartitioning": {
+    "field": "partition_date",
+    "type": "DAY"
+  },
+  "type": "TABLE"
+}

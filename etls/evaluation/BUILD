@@ -51,7 +51,3 @@ genrule(
         echo -e $${BRANCH}_$${COMMIT} > VERSIONTXT > $@
         """
 )
-
-#
-
-#cd /workspace/cicd

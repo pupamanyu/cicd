@@ -1,3 +1,19 @@
+#
+# Copyright 2020 Google LLC.
+#
+# This software is provided as-is, without warranty or representation
+# for any use or purpose. Your use of it is subject to your agreement with Google.
+
+"""
+Dag File(This one): subdag.py
+Purpose: Orchestrate GameEvent BigQuery SQL Scripts in Apache Airflow and develop ETL pipeline.
+         checkpoints are integrated in Dag for tables existence and create if not exists.
+         Data Recovery steps are executed at every table load step in case of failure.
+
+Input: Date
+Expected Output: GameEvent ETL Pipeline
+"""
+
 import os
 
 from airflow.models import DAG

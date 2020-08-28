@@ -1,0 +1,79 @@
+{
+  "clustering": {
+    "fields": [
+      "puuid"
+    ]
+  },
+  "id": "lor-data-platform-dev-f369:gouri_dev.clean_queue_result",
+  "kind": "bigquery#table",
+  "labels": {
+    "org_unit": "development"
+  },
+  "location": "US",
+  "schema": {
+    "fields": [
+      {
+        "name": "game_id",
+        "type": "STRING"
+      },
+      {
+        "name": "realm_id",
+        "type": "STRING"
+      },
+      {
+        "name": "puuid",
+        "type": "STRING"
+      },
+      {
+        "name": "is_ai",
+        "type": "BOOLEAN"
+      },
+      {
+        "name": "queue_name",
+        "type": "STRING"
+      },
+      {
+        "name": "queue_outcome",
+        "type": "STRING"
+      },
+      {
+        "name": "queue_timestamp_utc",
+        "type": "STRING"
+      },
+      {
+        "name": "queue_duration_seconds",
+        "type": "INTEGER"
+      },
+      {
+        "name": "mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "runtime_platform",
+        "type": "STRING"
+      },
+      {
+        "name": "deployment",
+        "type": "STRING"
+      },
+      {
+        "name": "datacenter",
+        "type": "STRING"
+      },
+      {
+        "name": "partition_date",
+        "type": "DATE"
+      }
+    ]
+  },
+  "tableReference": {
+    "datasetId": "gouri_dev",
+    "projectId": "lor-data-platform-dev-f369",
+    "tableId": "clean_queue_result"
+  },
+  "timePartitioning": {
+    "field": "partition_date",
+    "type": "DAY"
+  },
+  "type": "TABLE"
+}

@@ -1,0 +1,32 @@
+name: Bigquery Linting and Syntax checker
+
+on: 
+  pull_request:
+  push:
+    branches: 
+      - develop
+        
+jobs:
+  pre-commit:
+    name: linting and syntax format
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    
+    # Linting
+    - name: Linting
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install sqlint
+        sqlint ./etls/evaluation/lor/game_event/load_scripts/*.sql
+   
+   # Syntax format
+    - name: Syntax formatting
+      run: |
+        sqlint -f ./etls/evaluation/lor/game_event/load_scripts/*.sql

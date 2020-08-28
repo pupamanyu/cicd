@@ -1,0 +1,151 @@
+{
+  "clustering": {
+    "fields": [
+      "puuid"
+    ]
+  },
+  "id": "lor-data-platform-dev-f369:gouri_dev.clean_game_end",
+  "kind": "bigquery#table",
+  "labels": {
+    "org_unit": "development"
+  },
+  "location": "US",
+  "schema": {
+    "fields": [
+      {
+        "name": "game_id",
+        "type": "STRING"
+      },
+      {
+        "name": "realm_id",
+        "type": "STRING"
+      },
+      {
+        "name": "puuid",
+        "type": "STRING"
+      },
+      {
+        "name": "is_ai_filled",
+        "type": "BOOLEAN"
+      },
+      {
+        "name": "is_ai",
+        "type": "BOOLEAN"
+      },
+      {
+        "name": "queue_name",
+        "type": "STRING"
+      },
+      {
+        "name": "deck_id",
+        "type": "STRING"
+      },
+      {
+        "name": "faction1",
+        "type": "STRING"
+      },
+      {
+        "name": "faction2",
+        "type": "STRING"
+      },
+      {
+        "name": "faction3",
+        "type": "STRING"
+      },
+      {
+        "name": "old_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "opponent_puuid",
+        "type": "STRING"
+      },
+      {
+        "name": "opponent_player_name",
+        "type": "STRING"
+      },
+      {
+        "name": "old_opponent_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "opponent_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_start_rank",
+        "type": "STRING"
+      },
+      {
+        "name": "game_end_rank",
+        "type": "STRING"
+      },
+      {
+        "name": "game_start_lp",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_end_lp",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_end_time_utc",
+        "type": "STRING"
+      },
+      {
+        "name": "duration",
+        "type": "INTEGER"
+      },
+      {
+        "name": "total_turn_count",
+        "type": "INTEGER"
+      },
+      {
+        "name": "round_count",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_outcome",
+        "type": "STRING"
+      },
+      {
+        "name": "game_outcome_reason",
+        "type": "STRING"
+      },
+      {
+        "name": "order_of_play",
+        "type": "INTEGER"
+      },
+      {
+        "name": "runtime_platform",
+        "type": "STRING"
+      },
+      {
+        "name": "deployment",
+        "type": "STRING"
+      },
+      {
+        "name": "datacenter",
+        "type": "STRING"
+      },
+      {
+        "name": "partition_date",
+        "type": "DATE"
+      }
+    ]
+  },
+  "tableReference": {
+    "datasetId": "gouri_dev",
+    "projectId": "lor-data-platform-dev-f369",
+    "tableId": "clean_game_end"
+  },
+  "timePartitioning": {
+    "field": "partition_date",
+    "type": "DAY"
+  },
+  "type": "TABLE"
+}
