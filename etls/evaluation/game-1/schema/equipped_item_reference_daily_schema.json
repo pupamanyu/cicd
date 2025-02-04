@@ -1,5 +1,5 @@
 {
-  "id": "lor-data-platform-dev-f369:gouri_dev.equipped_item_reference_daily",
+  "id": "xxxxxxxxxxxxx:xxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
   "kind": "bigquery#table",
   "location": "US",
   "schema": {
@@ -23,9 +23,9 @@
     ]
   },
   "tableReference": {
-    "datasetId": "gouri_dev",
-    "projectId": "lor-data-platform-dev-f369",
-    "tableId": "equipped_item_reference_daily"
+    "datasetId": "xxxxxx",
+    "projectId": "xxxxxxxxxxxxx",
+    "tableId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   },
   "timePartitioning": {
     "field": "partition_date",

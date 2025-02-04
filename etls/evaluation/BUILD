@@ -18,7 +18,7 @@ load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
 
 pkg_tar(
     name = "game-event-dag",
-    srcs = ["//etls/evaluation:lor/game_event"],
+    srcs = ["//etls/evaluation:game-1/xxxxxxxxxx"],
     extension = "tar.bz2",
 )
 

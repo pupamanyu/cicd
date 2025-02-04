@@ -4,7 +4,7 @@
       "puuid"
     ]
   },
-  "id": "lor-data-platform-dev-f369:gouri_dev.clean_game_start",
+  "id": "xxxxxxxxxxxxx:xxxxxx.xxxxxxxxxxxxxx",
   "kind": "bigquery#table",
   "labels": {
     "org_unit": "development"
@@ -33,39 +33,11 @@
         "type": "BOOLEAN"
       },
       {
-        "name": "equipped_board_id",
-        "type": "STRING"
-      },
-      {
-        "name": "equipped_board_name",
-        "type": "STRING"
-      },
-      {
-        "name": "equipped_guardian_id",
-        "type": "STRING"
-      },
-      {
-        "name": "equipped_guardian_name",
-        "type": "STRING"
-      },
-      {
-        "name": "equipped_card_back_id",
-        "type": "STRING"
-      },
-      {
-        "name": "equipped_card_back_name",
-        "type": "STRING"
-      },
-      {
         "name": "queue_name",
         "type": "STRING"
       },
       {
         "name": "deck_id",
-        "type": "STRING"
-      },
-      {
-        "name": "game_start_time_utc",
         "type": "STRING"
       },
       {
@@ -79,6 +51,74 @@
       {
         "name": "faction3",
         "type": "STRING"
+      },
+      {
+        "name": "old_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "opponent_puuid",
+        "type": "STRING"
+      },
+      {
+        "name": "opponent_player_name",
+        "type": "STRING"
+      },
+      {
+        "name": "old_opponent_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "opponent_mmr",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_start_rank",
+        "type": "STRING"
+      },
+      {
+        "name": "game_end_rank",
+        "type": "STRING"
+      },
+      {
+        "name": "game_start_lp",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_end_lp",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_end_time_utc",
+        "type": "STRING"
+      },
+      {
+        "name": "duration",
+        "type": "INTEGER"
+      },
+      {
+        "name": "total_turn_count",
+        "type": "INTEGER"
+      },
+      {
+        "name": "round_count",
+        "type": "INTEGER"
+      },
+      {
+        "name": "game_outcome",
+        "type": "STRING"
+      },
+      {
+        "name": "game_outcome_reason",
+        "type": "STRING"
+      },
+      {
+        "name": "order_of_play",
+        "type": "INTEGER"
       },
       {
         "name": "runtime_platform",
@@ -99,9 +139,9 @@
     ]
   },
   "tableReference": {
-    "datasetId": "gouri_dev",
-    "projectId": "lor-data-platform-dev-f369",
-    "tableId": "clean_game_start"
+    "datasetId": "xxxxxx",
+    "projectId": "xxxxxxxxxxxxx",
+    "tableId": "xxxxxxxxxxxxxx"
   },
   "timePartitioning": {
     "field": "partition_date",

@@ -4,17 +4,17 @@ Copyright 2020 Google LLC.
 This software is provided as-is, without warranty or representation
 for any use or purpose. Your use of it is subject to your agreement with Google.
 
-SQL Script(This one): clean_game_start_inserttable
-Purpose: clean_game_start ETL Beam Pipeline
+SQL Script(This one): xxxxxxxxxxxxxxxx_inserttable
+Purpose: xxxxxxxxxxxxxxxx ETL Beam Pipeline
 
 Input: Date
 Expected Output: Delete existing date partitioned data.
-                 Populate clean_game_start data for date partition.
+                 Populate xxxxxxxxxxxxxxxx data for date partition.
 */
 
 #  Remove existing date partitioned data before insert.
 DELETE
-    `lor-data-platform-dev-f369.gouri_dev.clean_game_start`
+    `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxxxxxxxx`
 WHERE
         PARTITION_DATE = @dt_value;
 
@@ -23,7 +23,7 @@ CREATE TEMP FUNCTION previous_partition_date(dt STRING) AS (
     dt), INTERVAL 1 DAY)
     );
 
-INSERT `lor-data-platform-dev-f369.gouri_dev.clean_game_start` (game_id,
+INSERT `xxxxxxxxxxxxx.xxxxxx.xxxxxxxxxxxxxxxx` (game_id,
                                    realm_id,
                                    puuid,
                                    is_ai_filled,
@@ -54,19 +54,19 @@ WITH data AS
                  COALESCE(NULLIF(equipped_board.loadout_id,
                                  null),
                           "Unknown")                                             AS equipped_board_id,
-                 gouri_dev.title(COALESCE(NULLIF(equipped_board.loadout_name,
+                 xxxxxx.title(COALESCE(NULLIF(equipped_board.loadout_name,
                                                  null),
                                           "Unknown"))                            AS equipped_board_name,
                  COALESCE(NULLIF(equipped_guardian.loadout_id,
                                  null),
                           "Unknown")                                             AS equipped_guardian_id,
-                 gouri_dev.title(COALESCE(NULLIF(equipped_guardian.loadout_name,
+                 xxxxxx.title(COALESCE(NULLIF(equipped_guardian.loadout_name,
                                                  null),
                                           "Unknown"))                            AS equipped_guardian_name,
                  COALESCE(NULLIF(equipped_cardback.loadout_id,
                                  null),
                           "Unknown")                                             AS equipped_card_back_id,
-                 gouri_dev.title(COALESCE(NULLIF(equipped_cardback.loadout_name,
+                 xxxxxx.title(COALESCE(NULLIF(equipped_cardback.loadout_name,
                                                  null),
                                           "Unknown"))                            AS equipped_card_back_name,
                  CASE
@@ -76,15 +76,15 @@ WITH data AS
                          game_info.queue_name
                      END                                                            queue_name,
                  deck_info.deck_id                                               AS deck_id,
-                 gouri_dev.to_isoformat(start_time)                              AS game_start_time_utc,
-                 gouri_dev.format_faction(deck_info.factions[SAFE_OFFSET(0)])    AS faction1,
-                 gouri_dev.format_faction(deck_info.factions[SAFE_OFFSET(1)])    AS faction2,
-                 gouri_dev.format_faction(deck_info.factions[SAFE_OFFSET(2)])    AS faction3,
-                 gouri_dev.case_platform(game_info.player_info.runtime_platform) AS runtime_platform,
+                 xxxxxx.to_isoformat(start_time)                              AS game_start_time_utc,
+                 xxxxxx.format_faction(deck_info.factions[SAFE_OFFSET(0)])    AS faction1,
+                 xxxxxx.format_faction(deck_info.factions[SAFE_OFFSET(1)])    AS faction2,
+                 xxxxxx.format_faction(deck_info.factions[SAFE_OFFSET(2)])    AS faction3,
+                 xxxxxx.case_platform(game_info.player_info.runtime_platform) AS runtime_platform,
                  metadata.scope.deployment                                       AS deployment,
                  metadata.scope.datacenter                                       AS datacenter,
                  DATE(_PARTITIONTIME)                                                  AS partition_date
-          FROM `lor-data-platform-dev-f369.lor_insights.game_start`
+          FROM `xxxxxxxxxxxxx.xxxxxxxxxxxx.game_start`
           WHERE game_info.player_info.puuid NOT IN ('00000000-0000-0000-0000-000000000001', '_AI')
             AND (metadata.scope.deployment LIKE 'live%'
               OR metadata.scope.deployment LIKE '%svc')

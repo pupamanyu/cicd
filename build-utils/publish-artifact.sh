@@ -23,7 +23,7 @@ ARTIFACTDIR=${3}
 BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 COMMIT_SHA=$(git rev-parse HEAD)
 ARTIFACT="game-event.deb"
-RENAMED="game_event_${BRANCH_NAME}_${COMMIT_SHA}.deb"
+RENAMED="xxxxxxxxxx_${BRANCH_NAME}_${COMMIT_SHA}.deb"
 ARTIFACTREPO=${4}
 REGION=${5}
 

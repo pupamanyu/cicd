@@ -1,0 +1,46 @@
+{
+  "variables": {
+    "bq_conn_id": "my_gcp_conn",
+    "target_project_id": "xxxxxxxxxxxxx",
+    "target_dataset_name": "xxxxxx",
+    "source_project_id": "xxxxxx",
+    "source_dataset_name": "xxxxxx",
+    "tables": [
+      {
+        "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_inserttable.sql"
+      },
+      {
+        "name": "xxxxxxxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxxxxxxx_inserttable.sql"
+      },
+      {
+        "name": "xxxxxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxxxxx_inserttable.sql"
+      },
+      {
+        "name": "xxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxx_inserttable.sql"
+      },
+      {
+        "name": "xxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxx_inserttable.sql"
+      },
+      {
+        "name": "xxxxxxxxxxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxxxxxxxxxx_inserttable.sql"
+      },
+      {
+        "name": "xxxxxxxxxx",
+        "schema_gcs_location": "gs://xxxxxxx/xxxxxxxxxx_schema.json",
+        "loadscript": "/sql/xxxxxxxxxx_inserttable.sql"
+      }
+      ]
+  }
+}

@@ -4,7 +4,7 @@
       "puuid"
     ]
   },
-  "id": "lor-data-platform-dev-f369:gouri_dev.session_start_event",
+  "id": "xxxxxxxxxxxxx:xxxxxx.xxxxxxxxxxxxxxxxxxx",
   "kind": "bigquery#table",
   "labels": {
     "org_unit": "development"
@@ -47,9 +47,9 @@
     ]
   },
   "tableReference": {
-    "datasetId": "gouri_dev",
-    "projectId": "lor-data-platform-dev-f369",
-    "tableId": "session_start_event"
+    "datasetId": "xxxxxx",
+    "projectId": "xxxxxxxxxxxxx",
+    "tableId": "xxxxxxxxxxxxxxxxxxx"
   },
   "timePartitioning": {
     "field": "partition_date",

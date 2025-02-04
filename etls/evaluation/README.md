@@ -12,9 +12,9 @@ This repository contains source code for the guide on how to use Cloud Build, Ba
 The code is in two folders:
 
 1. monorepo-data/etls -
-evaluation/lor/game_event has Game Event code (sql scripts, dag workflow code).
+evaluation/game-1/xxxxxxxxxx has Game Event code (sql scripts, dag workflow code).
 The monorepo-data/build-utils folder contains shell scripts for the initial setup of the Google Cloud environment.
-The etls/evaluation/lor/game-event folder contains code that is developed over time, needs to be source controlled, and triggers automatic build and test processes. This folder contains the following subfolders:
+The etls/evaluation/game-1/game-event folder contains code that is developed over time, needs to be source controlled, and triggers automatic build and test processes. This folder contains the following subfolders:
 2. monorepo-data/buid-utils -
 This folder holds build scripts and environment setup scripts.
 
@@ -50,5 +50,5 @@ The Stage CI/CD pipeline automatically deploys the DAG definition from git Repos
 In the DAG definition for the test environment, an end-to-end test step is defined in addition to the data-processing workflow. The test step helps make sure that the data-processing workflow runs correctly.
 
 The data-processing workflow is illustrated in the following diagram.
-![](img/lor_game_event.png)
+![](img/game_event.png)
 
