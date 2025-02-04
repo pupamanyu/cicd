@@ -22,14 +22,14 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip3 install sqlfluff
-        sqlfluff lint --nofail ./etls/evaluation/game-1/load_scripts/*.sql --dialect ansi
+        sqlfluff lint --nofail ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
    
    # Syntax format
     - name: Syntax formatting
       run: |
-        sqlfluff fix ./etls/evaluation/game-1/load_scripts/*.sql --dialect ansi
+        sqlfluff fix ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
         
    # Lint after fixing the fixable errors
     - name: Lint again after fix
       run: |
-        sqlfluff lint ./etls/evaluation/game-1/load_scripts/*.sql --dialect ansi
+        sqlfluff lint ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
