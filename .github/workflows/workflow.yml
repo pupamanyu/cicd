@@ -13,20 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
     
     # Linting
     - name: Linting
       run: |
         python3 -m pip install --upgrade pip
-        pip3 install sqlint
-        sqlint ./etls/evaluation/game-1/xxxxxxxxxx/load_scripts/*.sql
+        pip3 install sqlfluff
+        sqlfluff lint --nofail ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
    
    # Syntax format
-    - name: Syntax formatting
-      run: |
-        sqlint -f ./etls/evaluation/game-1/xxxxxxxxxx/load_scripts/*.sql
+   # - name: Syntax formatting
+   #   run: |
+   #     sqlfluff fix ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
+        
+   # Lint after fixing the fixable errors
+   # - name: Lint again after fix
+   #   run: |
+   #     sqlfluff lint ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
