@@ -27,9 +27,9 @@ jobs:
    # Syntax format
     - name: Syntax formatting
       run: |
-        sqlint fix ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
+        sqlfluff fix ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
         
    # Lint after fixing the fixable errors
     - name: Lint again after fix
       run: |
-        sqlint fix ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
+        sqlfluff fix ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
