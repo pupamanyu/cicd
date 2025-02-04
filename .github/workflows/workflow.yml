@@ -20,7 +20,7 @@ jobs:
     # Linting
     - name: Linting
       run: |
-        python3 -m pip sqlfluff --upgrade pip
+        python3 -m pip install --upgrade pip
         pip3 install sqlfluff
         sqlfluff lint ./etls/evaluation/game-1/xxxxxxxxxx/load_scripts/*.sql --dialect bigquery
    
