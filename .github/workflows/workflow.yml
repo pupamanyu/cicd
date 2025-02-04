@@ -22,9 +22,9 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip3 install sqlfluff
-        sqlfluff lint ./etls/evaluation/game-1/xxxxxxxxxx/load_scripts/*.sql --dialect bigquery
+        sqlfluff lint ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
    
    # Syntax format
     - name: Syntax formatting
       run: |
-        sqlint fix ./etls/evaluation/game-1/xxxxxxxxxx/load_scripts/*.sql --dialect bigquery
+        sqlint fix ./etls/evaluation/game-1/load_scripts/*.sql --dialect bigquery
