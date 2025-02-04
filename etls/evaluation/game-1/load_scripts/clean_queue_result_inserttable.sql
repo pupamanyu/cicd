@@ -57,4 +57,3 @@ FROM (
          FROM data
          GROUP BY game_id, puuid
      )
-
